@@ -43,3 +43,7 @@ The site switches between English, Bosnian, German and Spanish from the globe bu
 - Measurement ID: `G-PYGB77Z40G` (set in `analytics.js`).
 - Events sent: `generate_lead` (contact form submitted), `cta_click`, `email_click`, `language_change`.
 - In GA4, mark `generate_lead` as a key event (Admin → Events) to track it as a conversion.
+
+## Cache busting
+Pages load `styles.css`, `script.js`, `i18n.js` and `analytics.js` with a `?v=` version tag, so browsers fetch fresh copies after a change.
+When you edit any of those files, bump the tag in `index.html`, `thank-you.html` and `404.html` (e.g. `?v=20261103-1` → `?v=20261103-2`).
