@@ -8,6 +8,7 @@ Plain HTML, CSS and JavaScript. No build step needed.
 - `styles.css`: colors and layout (palette is at the top, under `:root`)
 - `script.js`: mobile menu, number animations, contact form
 - `i18n.js`: language switcher and the Bosnian, German and Spanish translations
+- `analytics.js`: Google Analytics and the cookie consent banner
 - `assets/`: favicon and original logo
 
 ## Before launch, replace the placeholders
@@ -35,3 +36,9 @@ The site switches between English, Bosnian, German and Spanish from the globe bu
 - If you change English text in `index.html`, update the same key in `i18n.js` so the other languages match.
 - Link straight to a language with `?lang=bs`, `?lang=de` or `?lang=es`.
 - First-time visitors get their browser's language automatically; their choice is remembered after that.
+
+## Analytics (Google Analytics 4)
+`analytics.js` loads GA4 only after a visitor accepts the cookie banner (GDPR-friendly).
+- Turn it on by replacing `G-XXXXXXXXXX` in `analytics.js` with your Measurement ID. Until then the banner stays hidden and nothing loads.
+- Events sent: `generate_lead` (contact form submitted), `cta_click`, `email_click`, `language_change`.
+- In GA4, mark `generate_lead` as a key event (Admin → Events) to track it as a conversion.

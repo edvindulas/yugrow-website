@@ -11,6 +11,10 @@
   "js.error": "Something went wrong. Please email hello@yugrowagency.com."
  },
  "bs": {
+  "consent.text": "Koristimo kolačiće da bismo razumjeli kako posjetioci koriste našu stranicu i da bismo je poboljšali. Analitičke kolačiće možete prihvatiti ili odbiti.",
+  "consent.accept": "Prihvati",
+  "consent.decline": "Odbij",
+  "footer.cookies": "Postavke kolačića",
   "meta.title": "YU/GROW | Marketinška agencija pokretana AI-jem",
   "meta.desc": "YU/GROW je marketinška agencija pokretana umjetnom inteligencijom. Prepoznatljivost brenda, plaćeni oglasi, generisanje upita i praćenje u CRM-u, sve na jednom mjestu.",
   "js.sending": "Šaljemo…",
@@ -146,6 +150,10 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Sva prava zadržana."
  },
  "de": {
+  "consent.text": "Wir verwenden Cookies, um zu verstehen, wie Besucher unsere Website nutzen, und sie zu verbessern. Sie können Analyse-Cookies akzeptieren oder ablehnen.",
+  "consent.accept": "Akzeptieren",
+  "consent.decline": "Ablehnen",
+  "footer.cookies": "Cookie-Einstellungen",
   "meta.title": "YU/GROW | KI-gestützte Marketingagentur",
   "meta.desc": "YU/GROW ist eine KI-gestützte Marketingagentur für Unternehmen in den USA, Europa und darüber hinaus. Markenbekanntheit, bezahlte Anzeigen, Leadgenerierung und CRM-Tracking, alles an einem Ort.",
   "js.sending": "Wird gesendet…",
@@ -281,6 +289,10 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Alle Rechte vorbehalten."
  },
  "es": {
+  "consent.text": "Usamos cookies para entender cómo los visitantes usan nuestro sitio y mejorarlo. Puedes aceptar o rechazar las cookies de analítica.",
+  "consent.accept": "Aceptar",
+  "consent.decline": "Rechazar",
+  "footer.cookies": "Configuración de cookies",
   "meta.title": "YU/GROW | Agencia de marketing impulsada por IA",
   "meta.desc": "YU/GROW es una agencia de marketing impulsada por IA para empresas en EE. UU., Europa y más allá. Reconocimiento de marca, anuncios pagados, generación de leads y seguimiento en CRM, todo en un solo lugar.",
   "js.sending": "Enviando…",
@@ -465,6 +477,7 @@
   });
   wrap.querySelectorAll('[data-lang]').forEach(b => b.addEventListener('click', () => {
     apply(b.dataset.lang);
+    if (window.track) window.track('language_change', { language: b.dataset.lang });
     try { localStorage.setItem('yugrow-lang', b.dataset.lang); } catch (e) {}
     close();
     btn.focus();

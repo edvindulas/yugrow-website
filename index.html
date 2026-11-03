@@ -453,10 +453,20 @@
       </a>
       <p class="footer-tagline">We build. <span class="grad" style="white-space:nowrap">YU grow.</span></p>
       <p class="copy" data-i18n="footer.copy">© <span id="year">2026</span> YU/GROW. All rights reserved.</p>
+      <button type="button" class="cookie-link" id="cookieSettings" data-i18n="footer.cookies" hidden>Cookie settings</button>
     </div>
   </footer>
 
+  <div class="consent" id="consent" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+    <p data-i18n="consent.text">We use cookies to understand how visitors use our site and to improve it. You can accept or decline analytics cookies.</p>
+    <div class="consent-actions">
+      <button type="button" class="btn btn-ghost btn-sm" id="consentDecline" data-i18n="consent.decline">Decline</button>
+      <button type="button" class="btn btn-orange btn-sm" id="consentAccept" data-i18n="consent.accept">Accept</button>
+    </div>
+  </div>
+
   <script src="i18n.js"></script>
+  <script src="analytics.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
