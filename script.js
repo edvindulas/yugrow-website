@@ -51,22 +51,18 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('[data-count]').forEach(runCounter);
 }
 
-// Contact form: submits to Formspree (or any form endpoint) without leaving the page.
+// Contact form: emails each lead via FormSubmit (formsubmit.co) without leaving the page.
 const form = document.getElementById('leadForm');
 const note = document.getElementById('formNote');
 form.addEventListener('submit', async e => {
-  if (form.action.includes('YOUR_FORM_ID')) {
-    e.preventDefault();
-    note.textContent = 'Form not connected yet. Please email hello@yugrowagency.com for now.';
-    return;
-  }
   e.preventDefault();
   const btn = form.querySelector('button');
   btn.disabled = true;
   btn.textContent = 'Sending…';
   try {
     const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-    if (!res.ok) throw new Error();
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || String(data.success) !== 'true') throw new Error(data.message);
     form.reset();
     note.textContent = 'Thanks! We will be in touch within one business day.';
     note.classList.add('ok');
