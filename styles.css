@@ -241,6 +241,7 @@ p { margin: 0 0 1em; }
 .footer { padding: 40px 0; border-top: 1px solid var(--line); }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
 .footer p { margin: 0; color: var(--muted); font-size: .9rem; }
+.footer .footer-tagline { font-family: var(--font-head); font-weight: 900; font-size: clamp(1.1rem, 2.2vw, 1.5rem); text-transform: uppercase; letter-spacing: .01em; color: #fff; }
 
 /* ===== Reveal animation ===== */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
