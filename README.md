@@ -46,4 +46,4 @@ The site switches between English, Bosnian, German and Spanish from the globe bu
 
 ## Cache busting
 Pages load `styles.css`, `script.js`, `i18n.js` and `analytics.js` with a `?v=` version tag, so browsers fetch fresh copies after a change.
-When you edit any of those files, bump the tag in `index.html`, `thank-you.html` and `404.html` (e.g. `?v=20261103-2` → `?v=20261103-3`).
+When you edit any of those files, bump the tag in `index.html`, `thank-you.html` and `404.html` (e.g. `?v=20261103-3` → `?v=20261103-4`).

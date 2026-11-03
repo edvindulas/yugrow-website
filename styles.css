@@ -201,6 +201,31 @@ p { margin: 0 0 1em; }
 .text-link:hover { text-decoration: underline; }
 .problem { background: var(--bg-2); }
 
+/* ===== Lead journey visual ===== */
+.journey { margin-top: 56px; padding: 32px; border: 1px solid var(--line); border-radius: 20px;
+  background: linear-gradient(160deg, rgba(11, 33, 83, .55), rgba(5, 11, 26, .6)); }
+.journey-title { margin: 0 0 28px; font-family: var(--font-head); font-weight: 800; font-size: .8rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); text-align: center; }
+.journey-steps { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.journey-steps::before { content: ""; position: absolute; top: 26px; left: 12.5%; right: 12.5%; height: 2px;
+  background: linear-gradient(90deg, var(--blue), #4f8dff 50%, var(--orange)); opacity: .7; }
+.journey-steps li { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.j-icon { position: relative; z-index: 1; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--bg-2); border: 2px solid var(--blue); box-shadow: 0 0 0 6px var(--bg-2); }
+.j-icon svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.journey-steps strong { display: block; font-family: var(--font-head); font-size: 1rem; }
+.journey-steps small { display: block; color: var(--muted); font-size: .85rem; margin-top: 2px; }
+.j-won .j-icon { border-color: var(--orange); background: var(--orange); box-shadow: 0 0 0 6px var(--bg-2), 0 10px 30px -6px rgba(255, 106, 69, .8); }
+.j-won small { color: var(--orange); font-weight: 600; }
+@media (max-width: 760px) {
+  .journey { padding: 24px 20px; }
+  .journey-title { text-align: left; }
+  .journey-steps { grid-template-columns: 1fr; gap: 22px; }
+  .journey-steps::before { top: 27px; bottom: 27px; left: 26px; right: auto; width: 2px; height: auto;
+    background: linear-gradient(180deg, var(--blue), #4f8dff 50%, var(--orange)); }
+  .journey-steps li { flex-direction: row; text-align: left; gap: 16px; }
+  .j-icon { flex: none; }
+}
+
 /* ===== Services ===== */
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .card {

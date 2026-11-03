@@ -12,6 +12,15 @@
   "js.error": "Something went wrong. Please email hello@yugrowagency.com."
  },
  "bs": {
+  "j.title": "Svaki upit, praćen od prvog klika do zaključenog posla",
+  "j1.t": "Klik na oglas",
+  "j1.d": "Meta · Proljetna kampanja · Oglas B",
+  "j2.t": "Poslan obrazac",
+  "j2.d": "Landing stranica · 14:14",
+  "j3.t": "Kvalifikovan u CRM-u",
+  "j3.d": "Ocjena upita 92 · Follow-up poslan",
+  "j4.t": "Posao zaključen",
+  "j4.d": "$4.800 · praćeno do Oglasa B",
   "ty.kicker": "Zahtjev primljen",
   "ty.title": "Hvala vam! <span class=\"grad\">Vaš rast počinje ovdje.</span>",
   "ty.lead": "Primili smo vaše podatke. Evo šta slijedi:",
@@ -163,6 +172,15 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Sva prava zadržana."
  },
  "de": {
+  "j.title": "Jeder Lead – vom ersten Klick bis zum Abschluss nachverfolgt",
+  "j1.t": "Anzeige geklickt",
+  "j1.d": "Meta · Frühjahrskampagne · Anzeige B",
+  "j2.t": "Formular gesendet",
+  "j2.d": "Landingpage · 14:14 Uhr",
+  "j3.t": "Im CRM qualifiziert",
+  "j3.d": "Lead-Score 92 · Follow-up gesendet",
+  "j4.t": "Deal gewonnen",
+  "j4.d": "$4.800 · Anzeige B zugeordnet",
   "ty.kicker": "Anfrage erhalten",
   "ty.title": "Vielen Dank! <span class=\"grad\">Ihr Wachstum beginnt hier.</span>",
   "ty.lead": "Wir haben Ihre Angaben erhalten. So geht es weiter:",
@@ -314,6 +332,15 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Alle Rechte vorbehalten."
  },
  "es": {
+  "j.title": "Cada lead, rastreado desde el primer clic hasta la venta",
+  "j1.t": "Clic en el anuncio",
+  "j1.d": "Meta · Campaña de primavera · Anuncio B",
+  "j2.t": "Formulario enviado",
+  "j2.d": "Landing page · 2:14 p. m.",
+  "j3.t": "Calificado en el CRM",
+  "j3.d": "Puntuación 92 · Seguimiento enviado",
+  "j4.t": "Venta cerrada",
+  "j4.d": "$4,800 · atribuida al Anuncio B",
   "ty.kicker": "Solicitud recibida",
   "ty.title": "¡Gracias! <span class=\"grad\">Tu crecimiento empieza aquí.</span>",
   "ty.lead": "Recibimos tus datos. Esto es lo que sigue:",
