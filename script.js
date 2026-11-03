@@ -73,3 +73,12 @@ form.addEventListener('submit', async e => {
     btn.textContent = t('form.submit');
   }
 });
+
+// Logo always scrolls back to the very top (and closes the mobile menu)
+document.querySelectorAll('a.logo').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  nav.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+  window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  history.replaceState(null, '', location.pathname + location.search);
+}));
