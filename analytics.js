@@ -4,7 +4,7 @@
 // TO TURN ON: replace G-XXXXXXXXXX below with your Measurement ID
 // (Google Analytics > Admin > Data streams > your web stream).
 (function () {
-  const GA_ID = 'G-XXXXXXXXXX';
+  const GA_ID = 'G-PYGB77Z40G';
   const KEY = 'yugrow-consent';
   const enabled = /^G-[A-Z0-9]{6,}$/.test(GA_ID) && GA_ID !== 'G-XXXXXXXXXX';
 

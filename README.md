@@ -39,6 +39,6 @@ The site switches between English, Bosnian, German and Spanish from the globe bu
 
 ## Analytics (Google Analytics 4)
 `analytics.js` loads GA4 only after a visitor accepts the cookie banner (GDPR-friendly).
-- Turn it on by replacing `G-XXXXXXXXXX` in `analytics.js` with your Measurement ID. Until then the banner stays hidden and nothing loads.
+- Measurement ID: `G-PYGB77Z40G` (set in `analytics.js`).
 - Events sent: `generate_lead` (contact form submitted), `cta_click`, `email_click`, `language_change`.
 - In GA4, mark `generate_lead` as a key event (Admin → Events) to track it as a conversion.
