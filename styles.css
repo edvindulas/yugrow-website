@@ -40,17 +40,15 @@ p { margin: 0 0 1em; }
 
 /* ===== Logo ===== */
 .logo {
-  display: inline-flex; align-items: center;
+  display: inline-block; white-space: nowrap; line-height: 1;
   font-family: var(--font-head); font-weight: 900; font-size: 1.55rem;
   letter-spacing: 0.01em; text-decoration: none; color: #fff;
 }
 .logo-slash {
-  position: relative; display: inline-flex; flex-direction: column;
-  width: .55em; height: 1.1em; margin: 0 .08em; transform: skewX(-22deg);
+  /* traced from the logo: rises above cap height, drops below baseline */
+  width: .683em; height: .911em; margin: 0 -.02em 0 -.04em;
+  vertical-align: -.072em; display: inline-block; flex: none;
 }
-.logo-slash i { flex: 1; display: block; width: .26em; margin-left: .15em; }
-.logo-slash i:first-child { background: var(--blue); margin-bottom: .06em; transform: translateX(.09em); }
-.logo-slash i:last-child { background: var(--orange); transform: translateX(-.09em); }
 .logo-sm { font-size: 1.3rem; }
 
 /* ===== Buttons ===== */
