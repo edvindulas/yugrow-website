@@ -58,18 +58,18 @@ form.addEventListener('submit', async e => {
   e.preventDefault();
   const btn = form.querySelector('button');
   btn.disabled = true;
-  btn.textContent = 'Sending…';
+  btn.textContent = t('js.sending');
   try {
     const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
     const data = await res.json().catch(() => ({}));
     if (!res.ok || String(data.success) !== 'true') throw new Error(data.message);
     form.reset();
-    note.textContent = 'Thanks! We will be in touch within one business day.';
+    note.textContent = t('js.thanks');
     note.classList.add('ok');
   } catch {
-    note.textContent = 'Something went wrong. Please email hello@yugrowagency.com.';
+    note.textContent = t('js.error');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Book my free call';
+    btn.textContent = t('form.submit');
   }
 });

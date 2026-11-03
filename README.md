@@ -7,6 +7,7 @@ Plain HTML, CSS and JavaScript. No build step needed.
 - `index.html`: all page content (edit text here)
 - `styles.css`: colors and layout (palette is at the top, under `:root`)
 - `script.js`: mobile menu, number animations, contact form
+- `i18n.js`: language switcher and the Bosnian, German and Spanish translations
 - `assets/`: favicon and original logo
 
 ## Before launch, replace the placeholders
@@ -26,3 +27,11 @@ Plain HTML, CSS and JavaScript. No build step needed.
 
 ### Custom domain (optional)
 In **Settings → Pages → Custom domain**, enter your domain (e.g. `yugrowagency.com`). At your domain registrar, add the DNS records GitHub shows you, then turn on **Enforce HTTPS**.
+
+## Languages
+The site switches between English, Bosnian, German and Spanish from the globe button in the header.
+- English text lives in `index.html`. Each translatable element has a `data-i18n="key"` attribute.
+- Translations live in `i18n.js`, one block per language, using the same keys. Edit the text, keep the keys.
+- If you change English text in `index.html`, update the same key in `i18n.js` so the other languages match.
+- Link straight to a language with `?lang=bs`, `?lang=de` or `?lang=es`.
+- First-time visitors get their browser's language automatically; their choice is remembered after that.
