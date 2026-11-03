@@ -57,7 +57,7 @@ const note = document.getElementById('formNote');
 form.addEventListener('submit', async e => {
   if (form.action.includes('YOUR_FORM_ID')) {
     e.preventDefault();
-    note.textContent = 'Form not connected yet. Please email hello@yugrow.ba for now.';
+    note.textContent = 'Form not connected yet. Please email hello@yugrowagency.com for now.';
     return;
   }
   e.preventDefault();
@@ -71,7 +71,7 @@ form.addEventListener('submit', async e => {
     note.textContent = 'Thanks! We will be in touch within one business day.';
     note.classList.add('ok');
   } catch {
-    note.textContent = 'Something went wrong. Please email hello@yugrow.ba.';
+    note.textContent = 'Something went wrong. Please email hello@yugrowagency.com.';
   } finally {
     btn.disabled = false;
     btn.textContent = 'Book my free call';

@@ -11,7 +11,7 @@ Plain HTML, CSS and JavaScript. No build step needed.
 
 ## Before launch, replace the placeholders
 1. **Testimonials and results**: the names, quotes and case-study numbers are made up. Swap them for real ones as soon as you have them.
-2. **Contact details**: `hello@yugrow.ba` and `+387 61 000 000` in `index.html`.
+2. **Contact details**: `hello@yugrowagency.com` and `+387 61 000 000` in `index.html`.
 3. **Contact form**: create a free form at https://formspree.io, then replace `YOUR_FORM_ID` in `index.html` with your form ID. Until then the form tells visitors to email you.
 
 ## Host on GitHub Pages
@@ -25,4 +25,4 @@ Plain HTML, CSS and JavaScript. No build step needed.
 4. After a minute the site is live at `https://YOUR-USERNAME.github.io/yugrow-website/`.
 
 ### Custom domain (optional)
-In **Settings → Pages → Custom domain**, enter your domain (e.g. `yugrow.ba`). At your domain registrar, add the DNS records GitHub shows you, then turn on **Enforce HTTPS**.
+In **Settings → Pages → Custom domain**, enter your domain (e.g. `yugrowagency.com`). At your domain registrar, add the DNS records GitHub shows you, then turn on **Enforce HTTPS**.
