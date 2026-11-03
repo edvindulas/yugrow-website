@@ -9,6 +9,7 @@ Plain HTML, CSS and JavaScript. No build step needed.
 - `script.js`: mobile menu, number animations, contact form
 - `i18n.js`: language switcher and the Bosnian, German and Spanish translations
 - `analytics.js`: Google Analytics and the cookie consent banner
+- `thank-you.html`: page visitors land on after submitting the contact form (hidden from Google)
 - `assets/`: favicon and original logo
 
 ## Before launch, replace the placeholders

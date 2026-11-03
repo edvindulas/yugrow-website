@@ -24,8 +24,13 @@
   }
 
   // Send a custom event (no-op until the visitor has accepted).
-  window.track = function (name, params) {
-    if (loaded) gtag('event', name, params || {});
+  // Optional callback runs once the event is sent (or right away if analytics is off).
+  window.track = function (name, params, done) {
+    if (!loaded) { if (done) done(); return; }
+    let called = false;
+    const finish = () => { if (!called) { called = true; if (done) done(); } };
+    gtag('event', name, Object.assign({}, params, { event_callback: finish }));
+    if (done) setTimeout(finish, 1200); // never hold the visitor up for long
   };
 
   const banner = document.getElementById('consent');

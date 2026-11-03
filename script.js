@@ -63,10 +63,14 @@ form.addEventListener('submit', async e => {
     const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
     const data = await res.json().catch(() => ({}));
     if (!res.ok || String(data.success) !== 'true') throw new Error(data.message);
-    if (window.track) window.track('generate_lead', { form: 'contact', interest: form.interest.value });
-    form.reset();
+    const lang = document.documentElement.lang;
+    const go = () => { location.href = 'thank-you.html' + (lang && lang !== 'en' ? '?lang=' + lang : ''); };
     note.textContent = t('js.thanks');
     note.classList.add('ok');
+    form.reset();
+    if (window.track) window.track('generate_lead', { form: 'contact', interest: form.interest.value }, go);
+    else go();
+    return;
   } catch {
     note.textContent = t('js.error');
   } finally {

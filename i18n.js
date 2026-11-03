@@ -4,6 +4,7 @@
 (function () {
   const T = {
  "en": {
+  "ty.meta": "Thank you | YU/GROW",
   "meta.title": "YU/GROW | AI-Powered Marketing Agency",
   "meta.desc": "YU/GROW is an AI-powered marketing agency working with businesses in the US, Europe and beyond. Brand awareness, paid ads, lead generation and CRM tracking, all reported in one place.",
   "js.sending": "Sending…",
@@ -11,6 +12,18 @@
   "js.error": "Something went wrong. Please email hello@yugrowagency.com."
  },
  "bs": {
+  "ty.kicker": "Zahtjev primljen",
+  "ty.title": "Hvala vam! <span class=\"grad\">Vaš rast počinje ovdje.</span>",
+  "ty.lead": "Primili smo vaše podatke. Evo šta slijedi:",
+  "ty.s1t": "Pregledamo vaše poslovanje",
+  "ty.s1d": "Pogledamo vašu web stranicu, trenutni marketing i ciljeve koje ste naveli.",
+  "ty.s2t": "Javljamo vam se u roku od jednog radnog dana",
+  "ty.s2d": "Dobit ćete email sa hello@yugrowagency.com da odaberete termin za besplatan poziv od 30 minuta. Za svaki slučaj provjerite i spam folder.",
+  "ty.s3t": "Vaš besplatni strateški poziv",
+  "ty.s3d": "Pokazujemo vam gdje gubite upite i kako bi mogao izgledati vaš 3-mjesečni pilot.",
+  "ty.home": "Nazad na početnu",
+  "ty.services": "Pogledajte naše usluge",
+  "ty.meta": "Hvala | YU/GROW",
   "consent.text": "Koristimo kolačiće da bismo razumjeli kako posjetioci koriste našu stranicu i da bismo je poboljšali. Analitičke kolačiće možete prihvatiti ili odbiti.",
   "consent.accept": "Prihvati",
   "consent.decline": "Odbij",
@@ -150,6 +163,18 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Sva prava zadržana."
  },
  "de": {
+  "ty.kicker": "Anfrage erhalten",
+  "ty.title": "Vielen Dank! <span class=\"grad\">Ihr Wachstum beginnt hier.</span>",
+  "ty.lead": "Wir haben Ihre Angaben erhalten. So geht es weiter:",
+  "ty.s1t": "Wir sehen uns Ihr Unternehmen an",
+  "ty.s1d": "Wir prüfen Ihre Website, Ihr aktuelles Marketing und die Ziele, die Sie genannt haben.",
+  "ty.s2t": "Wir melden uns innerhalb eines Werktags",
+  "ty.s2d": "Sie erhalten eine E-Mail von hello@yugrowagency.com, um einen Termin für Ihr kostenloses 30-minütiges Gespräch zu wählen. Schauen Sie zur Sicherheit auch im Spam-Ordner nach.",
+  "ty.s3t": "Ihr kostenloses Strategiegespräch",
+  "ty.s3d": "Wir zeigen Ihnen, wo Leads verloren gehen und wie Ihr 3-monatiger Pilot aussehen könnte.",
+  "ty.home": "Zurück zur Startseite",
+  "ty.services": "Unsere Leistungen ansehen",
+  "ty.meta": "Vielen Dank | YU/GROW",
   "consent.text": "Wir verwenden Cookies, um zu verstehen, wie Besucher unsere Website nutzen, und sie zu verbessern. Sie können Analyse-Cookies akzeptieren oder ablehnen.",
   "consent.accept": "Akzeptieren",
   "consent.decline": "Ablehnen",
@@ -289,6 +314,18 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Alle Rechte vorbehalten."
  },
  "es": {
+  "ty.kicker": "Solicitud recibida",
+  "ty.title": "¡Gracias! <span class=\"grad\">Tu crecimiento empieza aquí.</span>",
+  "ty.lead": "Recibimos tus datos. Esto es lo que sigue:",
+  "ty.s1t": "Revisamos tu negocio",
+  "ty.s1d": "Analizamos tu sitio web, tu marketing actual y los objetivos que compartiste.",
+  "ty.s2t": "Te escribimos en un día hábil",
+  "ty.s2d": "Recibirás un correo de hello@yugrowagency.com para elegir la hora de tu llamada gratuita de 30 minutos. Revisa tu carpeta de spam por si acaso.",
+  "ty.s3t": "Tu llamada estratégica gratis",
+  "ty.s3d": "Te mostramos dónde se pierden leads y cómo podría ser tu piloto de 3 meses.",
+  "ty.home": "Volver al inicio",
+  "ty.services": "Ver nuestros servicios",
+  "ty.meta": "Gracias | YU/GROW",
   "consent.text": "Usamos cookies para entender cómo los visitantes usan nuestro sitio y mejorarlo. Puedes aceptar o rechazar las cookies de analítica.",
   "consent.accept": "Aceptar",
   "consent.decline": "Rechazar",
@@ -445,7 +482,7 @@
       const v = t(el.dataset.i18n);
       if (el.innerHTML !== v) el.innerHTML = v;
     });
-    document.title = t('meta.title');
+    document.title = t(document.body.classList.contains('ty-page') ? 'ty.meta' : 'meta.title');
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute('content', t('meta.desc'));
     const y = document.getElementById('year');
