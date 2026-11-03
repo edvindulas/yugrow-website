@@ -104,7 +104,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261103-1">
+  <link rel="stylesheet" href="styles.css?v=20261103-2">
 </head>
 <body id="top">
 
@@ -143,6 +143,11 @@
   <main>
     <!-- ===== Hero ===== -->
     <section class="hero">
+      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="assets/video/hero-poster.jpg" aria-hidden="true" tabindex="-1">
+        <source src="assets/video/hero-loop.webm" type="video/webm">
+        <source src="assets/video/hero-loop.mp4" type="video/mp4">
+      </video>
+      <div class="hero-shade" aria-hidden="true"></div>
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -465,8 +470,8 @@
     </div>
   </div>
 
-  <script src="i18n.js?v=20261103-1"></script>
-  <script src="analytics.js?v=20261103-1"></script>
-  <script src="script.js?v=20261103-1"></script>
+  <script src="i18n.js?v=20261103-2"></script>
+  <script src="analytics.js?v=20261103-2"></script>
+  <script src="script.js?v=20261103-2"></script>
 </body>
 </html>

@@ -15,6 +15,10 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 // Animated number counters
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Background video: show the still image instead for visitors who prefer reduced motion
+const heroVideo = document.getElementById('heroVideo');
+if (heroVideo && reduce) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
 function runCounter(el) {
   const target = parseFloat(el.dataset.count);
   const decimals = parseInt(el.dataset.decimals || '0', 10);
