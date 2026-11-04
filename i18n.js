@@ -12,6 +12,7 @@
   "js.error": "Something went wrong. Please email hello@yugrowagency.com."
  },
  "bs": {
+  "about.prev": "Ranije u",
   "nav.about": "O nama",
   "about.kicker": "O nama",
   "about.title": "Američko znanje. <span class=\"grad\">Bosansko srce.</span>",
@@ -21,7 +22,6 @@
   "about.ed.bio": "Iskustvo u digitalnom marketingu i biznisu. Vodi strategiju, kampanje i AI sisteme koji stoje iza rasta svakog klijenta.",
   "about.am.role": "Suosnivač · Operacije i finansije",
   "about.am.bio": "Iskustvo u biznisu, finansijama i operacijama. Brine da projekti, budžeti i izvještaji teku bez zastoja, tako da je svaki dolar i euro uračunat.",
-  "about.psu": "Diplomac Penn Statea",
   "about.v1t": "Rast za naše klijente",
   "about.v1d": "Marketinške metode dokazane u SAD-u, pokretane AI-jem i praćene u vašem CRM-u.",
   "about.v2t": "Prilike kod kuće",
@@ -188,6 +188,7 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Sva prava zadržana."
  },
  "de": {
+  "about.prev": "Zuvor bei",
   "nav.about": "Über uns",
   "about.kicker": "Über uns",
   "about.title": "Amerikanisches Know-how. <span class=\"grad\">Bosnisches Herz.</span>",
@@ -197,7 +198,6 @@
   "about.ed.bio": "Hintergrund in digitalem Marketing und Business. Verantwortet Strategie, Kampagnen und die KI-gestützten Systeme hinter dem Wachstum jedes Kunden.",
   "about.am.role": "Mitgründer · Operations & Finanzen",
   "about.am.bio": "Hintergrund in Business, Finanzen und Operations. Sorgt dafür, dass Projekte, Budgets und Reporting reibungslos laufen und jeder Dollar und Euro nachvollziehbar ist.",
-  "about.psu": "Penn-State-Absolvent",
   "about.v1t": "Wachstum für unsere Kunden",
   "about.v1d": "In den USA bewährte Marketingmethoden, unterstützt durch KI und erfasst in Ihrem CRM.",
   "about.v2t": "Chancen in der Heimat",
@@ -364,6 +364,7 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Alle Rechte vorbehalten."
  },
  "es": {
+  "about.prev": "Antes en",
   "nav.about": "Nosotros",
   "about.kicker": "Sobre nosotros",
   "about.title": "Experiencia estadounidense. <span class=\"grad\">Corazón bosnio.</span>",
@@ -373,7 +374,6 @@
   "about.ed.bio": "Experiencia en marketing digital y negocios. Dirige la estrategia, las campañas y los sistemas con IA detrás del crecimiento de cada cliente.",
   "about.am.role": "Cofundador · Operaciones y finanzas",
   "about.am.bio": "Experiencia en negocios, finanzas y operaciones. Se asegura de que proyectos, presupuestos e informes funcionen sin problemas y de que cada dólar y euro esté justificado.",
-  "about.psu": "Graduado de Penn State",
   "about.v1t": "Crecimiento para nuestros clientes",
   "about.v1d": "Métodos de marketing probados en EE. UU., impulsados por IA y registrados en tu CRM.",
   "about.v2t": "Oportunidades en casa",

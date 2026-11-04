@@ -42,8 +42,8 @@
     "BA"
   ],
   "founder": [
-    { "@type": "Person", "name": "Edvin Dulas", "jobTitle": "Co-founder", "alumniOf": { "@type": "CollegeOrUniversity", "name": "The Pennsylvania State University" } },
-    { "@type": "Person", "name": "Ajdin Mekic", "jobTitle": "Co-founder", "alumniOf": { "@type": "CollegeOrUniversity", "name": "The Pennsylvania State University" } }
+    { "@type": "Person", "name": "Edvin Dulas", "jobTitle": "Co-founder", "image": "https://yugrowagency.com/assets/team/edvin.jpg", "sameAs": ["https://www.linkedin.com/in/edvin-dulas-b6aab4200"] },
+    { "@type": "Person", "name": "Ajdin Mekic", "jobTitle": "Co-founder", "image": "https://yugrowagency.com/assets/team/ajdin.jpg", "sameAs": ["https://www.linkedin.com/in/ajdin-mekic-mba-27812b111"] }
   ],
   "knowsLanguage": [
     "en",
@@ -108,7 +108,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261104-1">
+  <link rel="stylesheet" href="styles.css?v=20261104-2">
 </head>
 <body id="top">
 
@@ -405,21 +405,35 @@
           </div>
           <div class="founders">
             <article class="founder">
-              <span class="founder-avatar" aria-hidden="true">ED</span>
+              <picture class="founder-photo ">
+                <source srcset="assets/team/edvin.webp" type="image/webp">
+                <img src="assets/team/edvin.jpg" alt="Portrait of Edvin Dulas, co-founder of YU/GROW" width="160" height="160" loading="lazy" decoding="async">
+              </picture>
               <div>
-                <h3>Edvin Dulas</h3>
+                <div class="founder-head">
+                  <h3>Edvin Dulas</h3>
+                  <a class="founder-linkedin" href="https://www.linkedin.com/in/edvin-dulas-b6aab4200" target="_blank" rel="noopener" aria-label="Edvin Dulas on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></a>
+                </div>
                 <p class="founder-role" data-i18n="about.ed.role">Co-founder · Marketing &amp; Growth</p>
                 <p data-i18n="about.ed.bio">Background in digital marketing and business. Leads strategy, campaigns and the AI-powered systems behind every client's growth.</p>
-                <span class="founder-tag" data-i18n="about.psu">Penn State graduate</span>
+                <p class="founder-prev" data-i18n="about.prev">Previously at</p>
+                <ul class="founder-companies"><li>MasTec</li><li>Universal Language Service</li><li>All-Star Talent</li></ul>
               </div>
             </article>
             <article class="founder">
-              <span class="founder-avatar founder-avatar-orange" aria-hidden="true">AM</span>
+              <picture class="founder-photo founder-photo-orange">
+                <source srcset="assets/team/ajdin.webp" type="image/webp">
+                <img src="assets/team/ajdin.jpg" alt="Portrait of Ajdin Mekic, co-founder of YU/GROW" width="160" height="160" loading="lazy" decoding="async">
+              </picture>
               <div>
-                <h3>Ajdin Mekic</h3>
+                <div class="founder-head">
+                  <h3>Ajdin Mekic</h3>
+                  <a class="founder-linkedin" href="https://www.linkedin.com/in/ajdin-mekic-mba-27812b111" target="_blank" rel="noopener" aria-label="Ajdin Mekic on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></a>
+                </div>
                 <p class="founder-role" data-i18n="about.am.role">Co-founder · Operations &amp; Finance</p>
                 <p data-i18n="about.am.bio">Background in business, finance and operations. Keeps projects, budgets and reporting running smoothly, so every dollar and euro is accounted for.</p>
-                <span class="founder-tag" data-i18n="about.psu">Penn State graduate</span>
+                <p class="founder-prev" data-i18n="about.prev">Previously at</p>
+                <ul class="founder-companies"><li>Foot Locker</li><li>Select Medical</li><li>Thermo Fisher Scientific</li></ul>
               </div>
             </article>
           </div>
@@ -525,8 +539,8 @@
     </div>
   </div>
 
-  <script src="i18n.js?v=20261104-1"></script>
-  <script src="analytics.js?v=20261104-1"></script>
-  <script src="script.js?v=20261104-1"></script>
+  <script src="i18n.js?v=20261104-2"></script>
+  <script src="analytics.js?v=20261104-2"></script>
+  <script src="script.js?v=20261104-2"></script>
 </body>
 </html>

@@ -281,12 +281,18 @@ p { margin: 0 0 1em; }
 .founder h3 { margin-bottom: 2px; font-size: 1.25rem; }
 .founder p { color: var(--muted); font-size: .95rem; margin-bottom: 12px; }
 .founder .founder-role { color: var(--blue); font-weight: 600; font-size: .9rem; margin-bottom: 10px; }
-.founder-avatar { flex: none; width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center;
-  font-family: var(--font-head); font-weight: 900; font-size: 1.35rem; background: linear-gradient(135deg, var(--blue), var(--navy-2));
-  box-shadow: 0 12px 30px -10px rgba(26, 109, 255, .7); }
-.founder-avatar-orange { background: linear-gradient(135deg, var(--orange), #c4421f); box-shadow: 0 12px 30px -10px rgba(255, 106, 69, .7); }
-.founder-tag { display: inline-block; font-size: .75rem; font-weight: 600; color: var(--text); padding: .3em .8em; border-radius: 999px;
-  border: 1px solid var(--line); background: rgba(5, 11, 26, .5); }
+.founder-photo { flex: none; width: 88px; height: 88px; border-radius: 50%; padding: 3px;
+  background: linear-gradient(135deg, var(--blue), var(--navy-2)); box-shadow: 0 12px 30px -10px rgba(26, 109, 255, .7); }
+.founder-photo-orange { background: linear-gradient(135deg, var(--orange), #c4421f); box-shadow: 0 12px 30px -10px rgba(255, 106, 69, .7); }
+.founder-photo img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.founder-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.founder-linkedin { flex: none; width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center;
+  border: 1px solid var(--line); color: var(--muted); transition: color .2s, border-color .2s, background .2s; }
+.founder-linkedin:hover { color: #fff; border-color: #0a66c2; background: #0a66c2; }
+.founder-linkedin svg { width: 16px; height: 16px; fill: currentColor; }
+.founder .founder-prev { margin: 0 0 8px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.founder-companies { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.founder-companies li { font-size: .78rem; font-weight: 600; padding: .3em .8em; border-radius: 999px; border: 1px solid var(--line); background: rgba(5, 11, 26, .5); }
 .pillars { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .pillars li { padding: 24px 24px 24px 28px; border-left: 3px solid var(--blue); background: rgba(5, 11, 26, .45); border-radius: 0 14px 14px 0; }
 .pillars li:nth-child(2) { border-left-color: #8a7fd0; }
