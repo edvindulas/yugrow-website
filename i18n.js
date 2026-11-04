@@ -4,6 +4,8 @@
 (function () {
   const T = {
  "en": {
+  "js.error2": "We couldn't send your request automatically.",
+  "js.mailto": "Send it by email instead →",
   "ty.meta": "Thank you | YU/GROW",
   "meta.title": "YU/GROW | AI-Powered Marketing Agency",
   "meta.desc": "YU/GROW is an AI-powered marketing agency working with businesses in the US, Europe and beyond. Brand awareness, paid ads, lead generation and CRM tracking, all reported in one place.",
@@ -12,6 +14,8 @@
   "js.error": "Something went wrong. Please email hello@yugrowagency.com."
  },
  "bs": {
+  "js.error2": "Nismo mogli automatski poslati vaš zahtjev.",
+  "js.mailto": "Pošaljite ga emailom →",
   "about.v4d": "Jasni izvještaji, stvarne brojke i 3-mjesečni pilot prije bilo kakve dugoročne obaveze. Ako nešto ne radi, kažemo vam i popravimo to.",
   "about.v4t": "Poštenje i transparentnost",
   "mission.text": "Odrasli smo slušajući šta su naši roditelji žrtvovali kako bismo mi imali prilike koje oni nikada nisu imali. YU/GROW je naš način da im se odužimo: znanje, alate i standarde koje smo naučili u Americi donosimo klijentima širom svijeta, a mladim ljudima kod kuće koji su spremni graditi karijeru otvaramo vrata.",
@@ -193,6 +197,8 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Sva prava zadržana."
  },
  "de": {
+  "js.error2": "Ihre Anfrage konnte nicht automatisch gesendet werden.",
+  "js.mailto": "Stattdessen per E-Mail senden →",
   "about.v4d": "Klare Reports, echte Zahlen und ein 3-monatiger Pilot vor jeder langfristigen Bindung. Wenn etwas nicht funktioniert, sagen wir es Ihnen und beheben es.",
   "about.v4t": "Ehrlichkeit und Transparenz",
   "mission.text": "Wir sind damit aufgewachsen zu hören, was unsere Eltern aufgegeben haben, damit wir Chancen bekommen, die sie nie hatten. YU/GROW ist unser Weg, das zu würdigen: Wir bringen die Fähigkeiten, Tools und Standards, die wir in Amerika gelernt haben, zu Kunden auf der ganzen Welt – und öffnen jungen Menschen in der Heimat, die bereit sind, eine Karriere aufzubauen, Türen.",
@@ -374,6 +380,8 @@
   "footer.copy": "© <span id=\"year\">2026</span> YU/GROW. Alle Rechte vorbehalten."
  },
  "es": {
+  "js.error2": "No pudimos enviar tu solicitud automáticamente.",
+  "js.mailto": "Envíala por correo →",
   "about.v4d": "Informes claros, números reales y un piloto de 3 meses antes de cualquier compromiso a largo plazo. Si algo no funciona, te lo decimos y lo corregimos.",
   "about.v4t": "Honestidad y transparencia",
   "mission.text": "Crecimos escuchando lo que nuestros padres sacrificaron para que tuviéramos oportunidades que ellos nunca tuvieron. YU/GROW es nuestra forma de honrarlo: llevamos las habilidades, herramientas y estándares que aprendimos en Estados Unidos a clientes de todo el mundo, y abrimos puertas a jóvenes en casa que están listos para construir una carrera.",
