@@ -55,55 +55,36 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('[data-count]').forEach(runCounter);
 }
 
-// Contact form: emails each lead via FormSubmit (formsubmit.co) without leaving the page.
+// Contact form: a regular form post to FormSubmit, which then redirects to the thank-you page.
+// (A normal post works everywhere, unlike background requests that some iPhone privacy
+// settings and in-app browsers block.)
 const form = document.getElementById('leadForm');
 const note = document.getElementById('formNote');
-form.addEventListener('submit', async e => {
+const btn = form.querySelector('button[type="submit"]');
+let sending = false;
+form.addEventListener('submit', e => {
   e.preventDefault();
-  const btn = form.querySelector('button');
-  const fd = new FormData(form);
-  const interest = form.interest.value;
-  // Spam check that never drops a real lead: the hidden field is removed before sending.
-  // If something filled it (bots, or aggressive autofill), the lead is still delivered, just flagged.
-  if (fd.get('hp_check')) fd.set('_subject', '[Check: possible spam] New lead from yugrowagency.com');
-  fd.delete('hp_check');
+  if (sending) return;
+  sending = true;
+  const lang = document.documentElement.lang;
+  document.getElementById('formNext').value =
+    'https://yugrowagency.com/thank-you.html' + (lang && lang !== 'en' ? '?lang=' + lang : '');
+  // Spam check that never drops a real lead: if the hidden field was filled, flag the email subject
+  const hp = document.getElementById('hpCheck');
+  if (hp.value) document.getElementById('formSubject').value = '[Check: possible spam] New lead from yugrowagency.com';
+  hp.disabled = true; // never sent
   btn.disabled = true;
   btn.textContent = t('js.sending');
-  note.classList.remove('ok');
-  try {
-    const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || 'HTTP ' + res.status);
-    const lang = document.documentElement.lang;
-    const go = () => { location.href = 'thank-you.html' + (lang && lang !== 'en' ? '?lang=' + lang : ''); };
-    note.textContent = t('js.thanks');
-    note.classList.add('ok');
-    form.reset();
-    if (window.track) window.track('generate_lead', { form: 'contact', interest }, go);
-    else go();
-    return;
-  } catch (err) {
-    const reason = (err && err.message) || 'Network error';
-    console.warn('Contact form failed:', reason);
-    if (window.track) window.track('form_error', { reason: reason.slice(0, 100) });
-    // Fallback: open the visitor's email app with everything they typed, so the lead is never lost
-    const lines = [
-      'Name: ' + (fd.get('name') || ''), 'Email: ' + (fd.get('email') || ''), 'Phone: ' + (fd.get('phone') || ''),
-      'Website: ' + (fd.get('website') || ''), 'Needs: ' + interest,
-    ];
-    const mail = document.createElement('a');
-    mail.href = 'mailto:hello@yugrowagency.com?subject=' + encodeURIComponent('Free growth plan request') + '&body=' + encodeURIComponent(lines.join('\n'));
-    mail.textContent = t('js.mailto');
-    note.textContent = t('js.error2') + ' ';
-    note.appendChild(mail);
-    // Add ?debug=1 to the page address to see the technical reason on screen
-    if (new URLSearchParams(location.search).has('debug')) {
-      const d = document.createElement('small'); d.className = 'form-debug'; d.textContent = 'Details: ' + reason; note.appendChild(d);
-    }
-  } finally {
-    btn.disabled = false;
-    btn.textContent = t('form.submit');
-  }
+  const send = () => HTMLFormElement.prototype.submit.call(form);
+  if (window.track) window.track('generate_lead', { form: 'contact', interest: form.interest.value }, send);
+  else send();
+});
+// If the visitor comes back with the browser's Back button, reset the button
+window.addEventListener('pageshow', () => {
+  sending = false;
+  btn.disabled = false;
+  btn.textContent = t('form.submit');
+  document.getElementById('hpCheck').disabled = false;
 });
 
 // Logo always scrolls back to the very top (and closes the mobile menu)
