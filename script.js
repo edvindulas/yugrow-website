@@ -63,6 +63,10 @@ form.addEventListener('submit', async e => {
   const btn = form.querySelector('button');
   const fd = new FormData(form);
   const interest = form.interest.value;
+  // Spam check that never drops a real lead: the hidden field is removed before sending.
+  // If something filled it (bots, or aggressive autofill), the lead is still delivered, just flagged.
+  if (fd.get('hp_check')) fd.set('_subject', '[Check: possible spam] New lead from yugrowagency.com');
+  fd.delete('hp_check');
   btn.disabled = true;
   btn.textContent = t('js.sending');
   note.classList.remove('ok');
