@@ -55,7 +55,7 @@
   else if (choice !== 'denied') show();
 
   // Key conversions: CTA clicks (form submissions and language changes are sent from script.js / i18n.js)
-  document.querySelectorAll('a[href="#contact"]').forEach(a => a.addEventListener('click', () =>
+  document.querySelectorAll('a[href="#contact"], a[href="/contact/"]').forEach(a => a.addEventListener('click', () =>
     window.track('cta_click', { cta_location: a.closest('header') ? 'header' : a.closest('.hero') ? 'hero' : 'other' })));
   document.querySelectorAll('a[href^="mailto:"]').forEach(a => a.addEventListener('click', () => window.track('email_click')));
 })();

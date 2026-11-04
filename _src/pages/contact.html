@@ -1,0 +1,59 @@
+<!--{
+ "title": "Contact | YU/GROW – Book a Free Strategy Call",
+ "description": "Book a free 30-minute strategy call with YU/GROW. Tell us about your business and we will reply within one business day.",
+ "path": "contact/index.html",
+ "url": "https://yugrowagency.com/contact/",
+ "page": "contact"
+}-->
+    <!-- ===== Contact / CTA ===== -->
+    <section class="section page-top cta" id="contact">
+      <div class="container cta-grid">
+        <div>
+          <p class="kicker kicker-orange" data-i18n="cta.kicker">Free strategy call</p>
+          <h1 class="page-title" data-i18n="cta.title">Let's find out where your growth is hiding.</h1>
+          <p data-i18n="cta.text">Book a free 30-minute call. We'll review your current marketing, show you where leads are slipping through and outline what your 3-month pilot could look like. No obligation.</p>
+          <ul class="contact-list">
+            <li><span data-i18n="contact.email">Email</span><a href="mailto:hello@yugrowagency.com">hello@yugrowagency.com</a></li>
+            <li data-i18n="contact.clients"><span>Clients</span>Worldwide, with calls in your time zone</li>
+          </ul>
+        </div>
+        <form class="form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+          <h3 data-i18n="form.title">Get your free growth plan</h3>
+          <input type="hidden" name="access_key" value="5cf7ef0c-5605-467c-b3c2-c99f3d4089e8">
+          <input type="hidden" name="subject" id="formSubject" value="New lead from yugrowagency.com">
+          <input type="hidden" name="from_name" value="YU/GROW website">
+          <input type="hidden" name="redirect" id="formNext" value="https://yugrowagency.com/thank-you.html">
+          <input type="text" name="hp_check" id="hpCheck" tabindex="-1" autocomplete="off" aria-hidden="true" hidden style="display:none">
+          <label><span data-i18n="form.name">Full name</span><input type="text" name="name" required autocomplete="name"></label>
+          <label><span data-i18n="contact.email">Email</span><input type="email" name="email" required autocomplete="email"></label>
+          <label><span data-i18n="form.phone">Phone</span><input type="tel" name="phone" autocomplete="tel"></label>
+          <label><span data-i18n="form.website">Company website</span><input type="text" name="website" placeholder="www.yourcompany.com"></label>
+          <label><span data-i18n="form.need">What do you need most?</span>
+            <select name="interest">
+              <option value="More leads" data-i18n="form.o1">More leads</option>
+              <option value="Brand awareness" data-i18n="s1.t">Brand awareness</option>
+              <option value="Paid ads management" data-i18n="form.o3">Paid ads management</option>
+              <option value="CRM setup and tracking" data-i18n="form.o4">CRM setup and tracking</option>
+              <option value="All of the above" data-i18n="form.o5">All of the above</option>
+            </select>
+          </label>
+          <button type="submit" class="btn btn-orange btn-block" data-i18n="form.submit">Book my free call</button>
+          <p class="form-note" id="formNote" data-i18n="form.note">We reply within one business day.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== What happens next ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker" data-i18n="next.kicker">What happens next</p>
+          <h2 data-i18n="next.title">From form to free strategy call in three steps</h2>
+        </div>
+        <ol class="steps steps-3">
+          <li><span class="num">01</span><h3 data-i18n="ty.s1t">We review your business</h3><p data-i18n="ty.s1d">We look at your website, your current marketing and the goals you shared.</p></li>
+          <li><span class="num">02</span><h3 data-i18n="ty.s2t">We email you within one business day</h3><p data-i18n="ty.s2d">You'll hear from hello@yugrowagency.com to pick a time for your free 30-minute call. Check your spam folder just in case.</p></li>
+          <li><span class="num">03</span><h3 data-i18n="ty.s3t">Your free strategy call</h3><p data-i18n="ty.s3d">We show you where leads are slipping through and what your 3-month pilot could look like.</p></li>
+        </ol>
+      </div>
+    </section>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{url}}">
+  <meta name="robots" content="{{robots}}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="YU/GROW">
+  <meta property="og:url" content="{{url}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="https://yugrowagency.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="YU/GROW: More leads. Less guesswork.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:image" content="https://yugrowagency.com/assets/og-image.png">
+  <meta name="theme-color" content="#050b1a">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+{{head_extra}}  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v={{v}}">
+</head>
+<body id="top" data-page="{{page}}"{{body_class}}>
+
+{{> header}}
+
+  <main>
+{{content}}
+  </main>
+
+{{> footer}}
+
+  <script src="/i18n.js?v={{v}}"></script>
+  <script src="/analytics.js?v={{v}}"></script>
+  <script src="/script.js?v={{v}}"></script>
+</body>
+</html>
