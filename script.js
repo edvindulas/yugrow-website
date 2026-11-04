@@ -55,36 +55,76 @@ if ('IntersectionObserver' in window) {
   document.querySelectorAll('[data-count]').forEach(runCounter);
 }
 
-// Contact form: a regular form post to FormSubmit, which then redirects to the thank-you page.
-// (A normal post works everywhere, unlike background requests that some iPhone privacy
-// settings and in-app browsers block.)
+// Contact form: sends the lead to Web3Forms (emails it to hello@yugrowagency.com),
+// then goes to the thank-you page. If the service can't be reached, visitors get a
+// one-tap "send by email" link with everything they typed, so no lead is ever lost.
 const form = document.getElementById('leadForm');
 const note = document.getElementById('formNote');
 const btn = form.querySelector('button[type="submit"]');
 let sending = false;
-form.addEventListener('submit', e => {
+
+function thankYouUrl() {
+  const lang = document.documentElement.lang;
+  return 'thank-you.html' + (lang && lang !== 'en' ? '?lang=' + lang : '');
+}
+
+form.addEventListener('submit', async e => {
   e.preventDefault();
   if (sending) return;
   sending = true;
-  const lang = document.documentElement.lang;
-  document.getElementById('formNext').value =
-    'https://yugrowagency.com/thank-you.html' + (lang && lang !== 'en' ? '?lang=' + lang : '');
-  // Spam check that never drops a real lead: if the hidden field was filled, flag the email subject
-  const hp = document.getElementById('hpCheck');
-  if (hp.value) document.getElementById('formSubject').value = '[Check: possible spam] New lead from yugrowagency.com';
-  hp.disabled = true; // never sent
+  const fd = new FormData(form);
+  const interest = form.interest.value;
+  // Spam check that never drops a real lead: hidden field is never sent; if filled, the subject is flagged
+  if (fd.get('hp_check')) fd.set('subject', '[Check: possible spam] New lead from yugrowagency.com');
+  fd.delete('hp_check');
+  fd.delete('redirect'); // only used if JavaScript is off
   btn.disabled = true;
   btn.textContent = t('js.sending');
-  const send = () => HTMLFormElement.prototype.submit.call(form);
-  if (window.track) window.track('generate_lead', { form: 'contact', interest: form.interest.value }, send);
-  else send();
+  note.classList.remove('ok');
+  note.textContent = t('form.note');
+
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(fd)),
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.success !== true) throw new Error(data.message || 'HTTP ' + res.status);
+    note.textContent = t('js.thanks');
+    note.classList.add('ok');
+    const go = () => { location.href = thankYouUrl(); };
+    if (window.track) window.track('generate_lead', { form: 'contact', interest }, go);
+    else go();
+  } catch (err) {
+    const reason = err && err.name === 'AbortError' ? 'Timed out' : (err && err.message) || 'Network error';
+    console.warn('Contact form failed:', reason);
+    if (window.track) window.track('form_error', { reason: reason.slice(0, 100) });
+    const lines = ['Name: ' + (fd.get('name') || ''), 'Email: ' + (fd.get('email') || ''), 'Phone: ' + (fd.get('phone') || ''),
+      'Website: ' + (fd.get('website') || ''), 'Needs: ' + interest];
+    const mail = document.createElement('a');
+    mail.href = 'mailto:hello@yugrowagency.com?subject=' + encodeURIComponent('Free growth plan request') + '&body=' + encodeURIComponent(lines.join('\n'));
+    mail.textContent = t('js.mailto');
+    note.textContent = t('js.error2') + ' ';
+    note.appendChild(mail);
+    if (new URLSearchParams(location.search).has('debug')) {
+      const d = document.createElement('small'); d.className = 'form-debug'; d.textContent = 'Details: ' + reason; note.appendChild(d);
+    }
+    sending = false;
+    btn.disabled = false;
+    btn.textContent = t('form.submit');
+  }
 });
+
 // If the visitor comes back with the browser's Back button, reset the button
 window.addEventListener('pageshow', () => {
   sending = false;
   btn.disabled = false;
   btn.textContent = t('form.submit');
-  document.getElementById('hpCheck').disabled = false;
 });
 
 // Logo always scrolls back to the very top (and closes the mobile menu)

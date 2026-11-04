@@ -15,7 +15,7 @@ Plain HTML, CSS and JavaScript. No build step needed.
 ## Before launch, replace the placeholders
 1. **Testimonials and results**: the names, quotes and case-study numbers are made up. Swap them for real ones as soon as you have them.
 2. **Contact details**: `hello@yugrowagency.com` in `index.html`.
-3. **Contact form**: create a free form at https://formspree.io, then replace `YOUR_FORM_ID` in `index.html` with your form ID. Until then the form tells visitors to email you.
+3. **Contact form**: sends leads through Web3Forms (web3forms.com) to hello@yugrowagency.com. The access key is in `index.html`. If the service is unreachable, visitors get a one-tap email fallback.
 
 ## Host on GitHub Pages
 1. Create a new repository on GitHub, e.g. `yugrow-website`.
@@ -46,4 +46,4 @@ The site switches between English, Bosnian, German and Spanish from the globe bu
 
 ## Cache busting
 Pages load `styles.css`, `script.js`, `i18n.js` and `analytics.js` with a `?v=` version tag, so browsers fetch fresh copies after a change.
-When you edit any of those files, bump the tag in `index.html`, `thank-you.html` and `404.html` (e.g. `?v=20261104-6` → `?v=20261104-7`).
+When you edit any of those files, bump the tag in `index.html`, `thank-you.html` and `404.html` (e.g. `?v=20261104-7` → `?v=20261104-8`).
