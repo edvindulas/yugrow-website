@@ -34,9 +34,12 @@
   const svg = document.createElementNS(NS, 'svg');
   svg.setAttribute('class', 'growth-path');
   svg.setAttribute('aria-hidden', 'true');
-  svg.innerHTML = '<defs><linearGradient id="gpGrad" x1="0" y1="0" x2="0" y2="1">' +
-    '<stop offset="0" stop-color="#1a6dff"/><stop offset=".45" stop-color="#7b5cff"/>' +
-    '<stop offset=".7" stop-color="#e04fb4"/><stop offset="1" stop-color="#ff6a45"/></linearGradient></defs>' +
+  // gpGrad is measured in page space (a straight vertical line has zero width, so a box-relative
+  // gradient would make it invisible); gpFrameGrad is relative to the form's frame
+  const stops = '<stop offset="0" stop-color="#1a6dff"/><stop offset=".45" stop-color="#7b5cff"/>' +
+    '<stop offset=".7" stop-color="#e04fb4"/><stop offset="1" stop-color="#ff6a45"/>';
+  svg.innerHTML = '<defs><linearGradient id="gpGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="1000">' + stops + '</linearGradient>' +
+    '<linearGradient id="gpFrameGrad" x1="0" y1="0" x2="0" y2="1">' + stops + '</linearGradient></defs>' +
     '<path class="gp-track"/><path class="gp-line"/><g class="gp-nodes"></g><circle class="gp-spark" r="6"/>';
   main.prepend(svg);
   const track = svg.querySelector('.gp-track');
@@ -119,6 +122,8 @@
       frame.style.display = 'none';
     }
     track.setAttribute('d', d); line.setAttribute('d', d);
+    const grad = svg.querySelector('#gpGrad');
+    grad.setAttribute('y1', y0); grad.setAttribute('y2', goal ? goal.y + 26 : H);
     total = line.getTotalLength();
     line.style.strokeDasharray = total;
     samples = [];
