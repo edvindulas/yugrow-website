@@ -68,7 +68,7 @@ function runCounter(el) {
   const decimals = parseInt(el.dataset.decimals || '0', 10);
   if (reduce) { el.textContent = target.toFixed(decimals); return; }
   const start = performance.now();
-  const dur = 1400;
+  const dur = 2600;
   const tick = now => {
     const p = Math.min((now - start) / dur, 1);
     const eased = 1 - Math.pow(1 - p, 3);
@@ -91,7 +91,7 @@ if ('IntersectionObserver' in window) {
       if (entry.target.dataset.count) runCounter(entry.target);
       io.unobserve(entry.target);
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.2, rootMargin: '0px 0px -18% 0px' });
   revealTargets.forEach(el => io.observe(el));
   document.querySelectorAll('.hero-card [data-count]').forEach(el => io.observe(el));
 } else {

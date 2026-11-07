@@ -164,7 +164,7 @@ p { margin: 0 0 1em; }
 .dash-kpis em { font-style: normal; font-size: .75rem; font-weight: 600; }
 .up { color: #31d07f; }
 .dash-chart { width: 100%; height: 120px; margin-bottom: 16px; }
-.dash-chart .line { stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 2s .3s ease forwards; }
+.dash-chart .line { stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 3.4s .8s ease forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 .dash-pipeline { display: grid; gap: 8px; }
 .dash-pipeline div { display: grid; grid-template-columns: 82px 1fr; align-items: center; gap: 10px; font-size: .8rem; color: var(--muted); }
@@ -395,7 +395,7 @@ p { margin: 0 0 1em; }
 .cookie-link:hover { color: #fff; }
 
 /* ===== Reveal animation ===== */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 1s ease, transform 1s cubic-bezier(.2, .8, .2, 1); }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -667,9 +667,9 @@ main { overflow-x: clip; }
   .hero-copy > *:nth-child(4) { animation-delay: .4s; }
   .hero-copy > *:nth-child(5) { animation-delay: .52s; }
   .hero-card { animation: cardIn 1s .35s cubic-bezier(.2, .8, .2, 1) both, floatY 7s 1.4s ease-in-out infinite; }
-  .dash-pipeline b { animation: barGrow 1.3s cubic-bezier(.2, .8, .2, 1) both; transform-origin: left; }
-  .dash-pipeline div:nth-child(1) b { animation-delay: .9s; } .dash-pipeline div:nth-child(2) b { animation-delay: 1.05s; }
-  .dash-pipeline div:nth-child(3) b { animation-delay: 1.2s; } .dash-pipeline div:nth-child(4) b { animation-delay: 1.35s; }
+  .dash-pipeline b { animation: barGrow 2.2s cubic-bezier(.2, .8, .2, 1) both; transform-origin: left; }
+  .dash-pipeline div:nth-child(1) b { animation-delay: 1.2s; } .dash-pipeline div:nth-child(2) b { animation-delay: 1.6s; }
+  .dash-pipeline div:nth-child(3) b { animation-delay: 2s; } .dash-pipeline div:nth-child(4) b { animation-delay: 2.4s; }
   .live .dot { animation: pulse 1.8s infinite; }
 
   /* platforms ticker */
@@ -687,19 +687,19 @@ main { overflow-x: clip; }
   .card.in .icon { animation: iconPop .7s .2s cubic-bezier(.3, 1.6, .5, 1) both; }
 
   /* lead journey: the connector fills and each step lights up in turn */
-  .journey-steps::before { transform: scaleX(0); transform-origin: left; transition: transform 1.6s cubic-bezier(.4, 0, .2, 1); }
+  .journey-steps::before { transform: scaleX(0); transform-origin: left; transition: transform 2.8s cubic-bezier(.4, 0, .2, 1); }
   .journey.play .journey-steps::before { transform: scaleX(1); }
-  .journey-steps li { opacity: .35; transition: opacity .5s; }
+  .journey-steps li { opacity: .35; transition: opacity .7s; }
   .journey.play .journey-steps li { opacity: 1; }
-  .journey.play .journey-steps li:nth-child(1) { transition-delay: .1s; } .journey.play .journey-steps li:nth-child(2) { transition-delay: .5s; }
-  .journey.play .journey-steps li:nth-child(3) { transition-delay: .9s; } .journey.play .journey-steps li:nth-child(4) { transition-delay: 1.3s; }
-  .journey.play .j-icon { animation: iconPop .6s cubic-bezier(.3, 1.6, .5, 1) both; }
-  .journey.play li:nth-child(2) .j-icon { animation-delay: .4s; } .journey.play li:nth-child(3) .j-icon { animation-delay: .8s; }
-  .journey.play li:nth-child(4) .j-icon { animation-delay: 1.2s; }
+  .journey.play .journey-steps li:nth-child(1) { transition-delay: .2s; } .journey.play .journey-steps li:nth-child(2) { transition-delay: 1s; }
+  .journey.play .journey-steps li:nth-child(3) { transition-delay: 1.8s; } .journey.play .journey-steps li:nth-child(4) { transition-delay: 2.6s; }
+  .journey.play .j-icon { animation: iconPop .8s .2s cubic-bezier(.3, 1.6, .5, 1) both; }
+  .journey.play li:nth-child(2) .j-icon { animation-delay: 1s; } .journey.play li:nth-child(3) .j-icon { animation-delay: 1.8s; }
+  .journey.play li:nth-child(4) .j-icon { animation-delay: 2.6s; }
 
   /* testimonial stars pop in one by one */
   .stars i { display: inline-block; font-style: normal; opacity: 0; transform: scale(.3) rotate(-30deg); }
-  .stars.play i { animation: starPop .5s calc(var(--i) * .12s) cubic-bezier(.3, 1.6, .5, 1) forwards; }
+  .stars.play i { animation: starPop .6s calc(.2s + var(--i) * .22s) cubic-bezier(.3, 1.6, .5, 1) forwards; }
 
   /* background glows drift slowly */
   .floater.orb { animation: drift 16s ease-in-out infinite alternate; }

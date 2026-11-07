@@ -244,12 +244,12 @@
     const c = counters.find(c => c.el === en.target);
     if (c && !reduce) {
       const t0 = performance.now();
-      const tick = now => { const k = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+      const tick = now => { const k = Math.min(1, (now - t0) / 2600), e = 1 - Math.pow(1 - k, 3);
         c.el.textContent = c.pre + (c.num * e).toFixed(c.dec) + c.post; if (k < 1) requestAnimationFrame(tick); };
       requestAnimationFrame(tick);
     }
     playIO.unobserve(en.target);
-  }), { threshold: 0.35 }) : null;
+  }), { threshold: 0.6, rootMargin: '0px 0px -15% 0px' }) : null;
   if (playIO) document.querySelectorAll('.case-num, .journey, .stars').forEach(el => playIO.observe(el));
   else document.querySelectorAll('.journey, .stars').forEach(el => el.classList.add('play'));
 
@@ -269,7 +269,7 @@
     else if (el.matches('.case, .quote, .stat, .card')) el.classList.add('zoom');
     const sibs = el.parentElement ? [...el.parentElement.children].filter(s => s.classList.contains('reveal')) : [];
     const i = sibs.indexOf(el);
-    if (i > 0) el.style.transitionDelay = Math.min(i, 5) * 90 + 'ms';
+    if (i > 0) el.style.transitionDelay = Math.min(i, 5) * 150 + 'ms';
   });
 
   /* ---------- interactive: card tilt + cursor glow, hero spotlight ---------- */
