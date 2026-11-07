@@ -64,6 +64,8 @@
   });
 
   function buildPath() {
+    // the growth path + arrow appear on the homepage only
+    if (document.body.dataset.page !== 'home') { svg.style.display = 'none'; bubble.style.display = 'none'; total = 0; return; }
     const sections = [...main.children].filter(el => el.tagName === 'SECTION');
     if (sections.length < 2) { svg.style.display = 'none'; bubble.style.display = 'none'; return; }
     const W = main.clientWidth, H = main.scrollHeight;

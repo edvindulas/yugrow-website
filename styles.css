@@ -655,9 +655,6 @@ main { overflow-x: clip; }
 /* room above the form on smaller screens for the journey's "You made it!" bubble */
 @media (max-width: 980px) { .cta-grid { row-gap: 110px; } }
 
-/* room above the "Get my free growth plan" button for the journey arrow */
-.cta-band { padding-top: clamp(96px, 10vw, 128px); }
-
 /* =====================================================================
    MORE MOTION (all switched off for visitors who prefer reduced motion)
    ===================================================================== */
@@ -728,9 +725,4 @@ main { overflow-x: clip; }
 @keyframes wobble { 0% { rotate: -8deg; translate: 0 0; } 100% { rotate: 10deg; translate: -14px 18px; } }
 @media (prefers-reduced-motion: reduce) {
   .reveal.from-left, .reveal.from-right, .reveal.zoom { transform: none; }
-}
-
-/* bottom banner on phones/tablets: stack the button below the headline with room for the journey arrow */
-@media (max-width: 1000px) {
-  .cta-band-inner { flex-direction: column; align-items: flex-start; row-gap: 104px; }
 }
