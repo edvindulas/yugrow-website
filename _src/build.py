@@ -32,7 +32,7 @@ def include(text):
 
 # Version tag = hash of the CSS/JS files, so it changes only when they change
 h = hashlib.sha1()
-for f in ['styles.css', 'script.js', 'i18n.js', 'analytics.js']:
+for f in ['styles.css', 'script.js', 'i18n.js', 'analytics.js', 'fx.js']:
     h.update((ROOT / f).read_bytes())
 version = h.hexdigest()[:10]
 

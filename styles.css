@@ -432,3 +432,130 @@ p { margin: 0 0 1em; }
   .dash-kpis strong { font-size: 1.15rem; }
   .form, .panel, .quote, .case { padding: 24px; }
 }
+
+/* =====================================================================
+   ADVENTURE THEME: "From night to sunrise"
+   The page background travels from navy night → violet/magenta dusk →
+   orange sunrise as you scroll (driven by --p, 0→1, set in fx.js).
+   ===================================================================== */
+:root {
+  --violet: #7b5cff;
+  --magenta: #e04fb4;
+  --p: 0;                       /* page scroll progress */
+  --glass: rgba(9, 18, 44, .58);
+  --glass-strong: rgba(7, 14, 36, .78);
+}
+
+/* --- the travelling sky --- */
+.sky { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: var(--bg); }
+.sky i { position: absolute; inset: -20%; display: block; will-change: opacity, transform; }
+.sky .sky-night {
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 10%, rgba(26, 109, 255, .38), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 60%, rgba(18, 48, 110, .55), transparent 70%);
+  opacity: calc(1 - var(--p) * 1.4);
+}
+.sky .sky-dusk {
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 30%, rgba(123, 92, 255, .42), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 85% 70%, rgba(224, 79, 180, .34), transparent 70%);
+  opacity: calc(1 - max(var(--p) - .5, .5 - var(--p)) * 2.4);
+  transform: translateY(calc(var(--p) * -8%));
+}
+.sky .sky-dawn {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 110%, rgba(255, 106, 69, .75), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 12% 70%, rgba(255, 150, 80, .35), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 88% 45%, rgba(224, 79, 180, .40), transparent 70%),
+    linear-gradient(180deg, rgba(40, 14, 40, .0) 20%, rgba(120, 40, 50, .35));
+  opacity: calc((var(--p) - .5) * 2.2);
+}
+/* faint stars that fade as the "sun" rises */
+.sky .sky-stars {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.7), transparent 60%),
+    radial-gradient(1px 1px at 33% 42%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 58% 12%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(1px 1px at 72% 33%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 88% 22%, rgba(255,255,255,.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 22% 70%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 46% 82%, rgba(255,255,255,.4), transparent 60%),
+    radial-gradient(1px 1px at 80% 64%, rgba(255,255,255,.5), transparent 60%);
+  background-size: 600px 600px;
+  opacity: calc(.9 - var(--p) * 1.6);
+}
+
+/* sections become transparent so the sky shows through */
+.problem, .results, .about, .ai-band, .trust, .cta, .cta-band { background: transparent; }
+.trust { background: rgba(5, 11, 26, .25); }
+.ai-band, .about { border-block: 1px solid rgba(154, 168, 199, .1); }
+.hero-shade { background:
+    linear-gradient(90deg, rgba(5, 11, 26, .85) 0%, rgba(5, 11, 26, .5) 45%, rgba(5, 11, 26, .15) 100%),
+    linear-gradient(180deg, rgba(5, 11, 26, 0) 55%, rgba(5, 11, 26, .0) 100%); }
+.hero-video { -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); mask-image: linear-gradient(180deg, #000 70%, transparent); }
+
+/* frosted-glass cards */
+.card, .case, .quote, .steps li, .faq details, .panel, .ai-list li, .founder, .mission, .journey, .hero-card, .form, .pillars li {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%);
+  border-color: rgba(170, 185, 230, .16);
+}
+.form, .hero-card { background: var(--glass-strong); }
+.panel { border-left-color: var(--orange); }
+
+/* --- the growth path (SVG built by fx.js) --- */
+main { position: relative; }
+.growth-path { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; z-index: 0; overflow: visible; }
+.growth-path .gp-track { fill: none; stroke: rgba(154, 168, 199, .10); stroke-width: 2; stroke-dasharray: 2 10; stroke-linecap: round; }
+.growth-path .gp-line { fill: none; stroke: url(#gpGrad); stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(123, 92, 255, .7)); }
+.growth-path .gp-node { fill: var(--bg); stroke: rgba(154, 168, 199, .35); stroke-width: 2; transition: fill .4s, stroke .4s, r .4s; }
+.growth-path .gp-node.lit { fill: #fff; stroke: var(--orange); r: 7; filter: drop-shadow(0 0 8px rgba(255, 106, 69, .9)); }
+.growth-path .gp-spark { fill: #fff; filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 18px var(--orange)); }
+main > section { position: relative; z-index: 1; }
+
+/* --- floating parallax shapes --- */
+.floaters { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.floater { position: absolute; display: block; will-change: transform; }
+.floater.orb { border-radius: 50%; filter: blur(40px); opacity: .55; }
+.floater.slash { width: 18px; height: 70px; transform-origin: center; border-radius: 3px; opacity: .55; }
+.floater.slash::before { content: ""; position: absolute; inset: 0; border-radius: 3px; transform: skewX(-22deg); background: var(--c); box-shadow: 0 0 24px var(--c); }
+
+/* --- more colour --- */
+.card:nth-child(6n+1) .icon { background: rgba(26, 109, 255, .16); }
+.card:nth-child(6n+2) .icon { background: rgba(123, 92, 255, .18); } .card:nth-child(6n+2) .icon svg { stroke: #a993ff; }
+.card:nth-child(6n+3) .icon { background: rgba(224, 79, 180, .16); } .card:nth-child(6n+3) .icon svg { stroke: #f17fcd; }
+.card:nth-child(6n+4) .icon { background: rgba(255, 106, 69, .16); } .card:nth-child(6n+4) .icon svg { stroke: #ff8a6b; }
+.card:nth-child(6n+5) .icon { background: rgba(49, 208, 160, .14); } .card:nth-child(6n+5) .icon svg { stroke: #4fe0b4; }
+.card:nth-child(6n+6) .icon { background: rgba(255, 196, 69, .14); } .card:nth-child(6n+6) .icon svg { stroke: #ffc861; }
+.kicker { background: linear-gradient(90deg, var(--blue), var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block; }
+.kicker-orange { background: linear-gradient(90deg, var(--magenta), var(--orange)); -webkit-background-clip: text; background-clip: text; }
+.grad { background-size: 200% 100%; animation: gradShift 8s ease-in-out infinite; background-image: linear-gradient(90deg, var(--blue), var(--violet) 30%, var(--magenta) 55%, var(--orange) 80%, var(--blue)); }
+@keyframes gradShift { 50% { background-position: 100% 0; } }
+.stat:nth-child(1) strong { color: var(--blue); } .stat:nth-child(2) strong { color: #a993ff; }
+.stat:nth-child(3) strong { color: #f17fcd; } .stat:nth-child(4) strong { color: var(--orange); }
+
+/* --- interactive: cursor glow on cards + gentle 3D tilt --- */
+.tilt { transform-style: preserve-3d; transition: transform .25s ease, border-color .25s; }
+.tilt::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(140, 120, 255, .22), transparent 60%); }
+.tilt:hover::after { opacity: 1; }
+.card, .case, .quote, .steps li, .founder { position: relative; }
+.hero { --sx: 70%; --sy: 30%; }
+.hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: radial-gradient(500px circle at var(--sx) var(--sy), rgba(123, 92, 255, .16), transparent 60%); }
+.hero-grid { z-index: 1; }
+
+/* --- livelier reveals (directions set by fx.js) --- */
+.reveal.from-left { transform: translateX(-40px); }
+.reveal.from-right { transform: translateX(40px); }
+.reveal.zoom { transform: scale(.94); }
+.reveal.in { transform: none; }
+
+@media (max-width: 760px) {
+  .growth-path .gp-line { stroke-width: 2.5; }
+  .floater.orb { opacity: .4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grad { animation: none; }
+  .tilt { transition: none; }
+}
