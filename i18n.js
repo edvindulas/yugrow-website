@@ -4,6 +4,9 @@
 (function () {
   const T = {
  "en": {
+  "gp.t": "You made it!",
+  "gp.d": "Your free growth plan is one form away.",
+  "gp.d2": "Your free growth plan is one click away.",
   "js.error2": "We couldn't send your request automatically.",
   "js.mailto": "Send it by email instead →",
   "js.sending": "Sending…",
@@ -11,6 +14,9 @@
   "js.error": "Something went wrong. Please email hello@yugrowagency.com."
  },
  "bs": {
+  "gp.t": "Stigli ste!",
+  "gp.d": "Vaš besplatni plan rasta udaljen je samo jedan obrazac.",
+  "gp.d2": "Vaš besplatni plan rasta udaljen je samo jedan klik.",
   "js.error2": "Nismo mogli automatski poslati vaš zahtjev.",
   "js.mailto": "Pošaljite ga emailom →",
   "about.v4d": "Jasni izvještaji, stvarne brojke i 3-mjesečni pilot prije bilo kakve dugoročne obaveze. Ako nešto ne radi, kažemo vam i popravimo to.",
@@ -227,6 +233,9 @@
   "sd.6c": "Tekstovi za web stranice i oglase"
  },
  "de": {
+  "gp.t": "Geschafft!",
+  "gp.d": "Ihr kostenloser Wachstumsplan ist nur ein Formular entfernt.",
+  "gp.d2": "Ihr kostenloser Wachstumsplan ist nur einen Klick entfernt.",
   "js.error2": "Ihre Anfrage konnte nicht automatisch gesendet werden.",
   "js.mailto": "Stattdessen per E-Mail senden →",
   "about.v4d": "Klare Reports, echte Zahlen und ein 3-monatiger Pilot vor jeder langfristigen Bindung. Wenn etwas nicht funktioniert, sagen wir es Ihnen und beheben es.",
@@ -443,6 +452,9 @@
   "sd.6c": "Texte für Website und Anzeigen"
  },
  "es": {
+  "gp.t": "¡Llegaste!",
+  "gp.d": "Tu plan de crecimiento gratis está a un formulario de distancia.",
+  "gp.d2": "Tu plan de crecimiento gratis está a un clic de distancia.",
   "js.error2": "No pudimos enviar tu solicitud automáticamente.",
   "js.mailto": "Envíala por correo →",
   "about.v4d": "Informes claros, números reales y un piloto de 3 meses antes de cualquier compromiso a largo plazo. Si algo no funciona, te lo decimos y lo corregimos.",
@@ -685,6 +697,8 @@
     const y = document.getElementById('year');
     if (y) y.textContent = new Date().getFullYear();
     document.getElementById('langCurrent').textContent = lang.toUpperCase();
+    const arrow = document.querySelector('.gp-arrow');
+    if (arrow) { const l = t(document.getElementById('leadForm') ? 'gp.d' : 'gp.d2'); arrow.setAttribute('aria-label', l); arrow.title = l; }
     document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-checked', String(b.dataset.lang === lang)));
   }
 

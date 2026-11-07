@@ -506,10 +506,10 @@ p { margin: 0 0 1em; }
 /* --- the growth path (SVG built by fx.js) --- */
 main { position: relative; }
 .growth-path { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; z-index: 0; overflow: visible; }
-.growth-path .gp-track { fill: none; stroke: rgba(154, 168, 199, .10); stroke-width: 2; stroke-dasharray: 2 10; stroke-linecap: round; }
-.growth-path .gp-line { fill: none; stroke: url(#gpGrad); stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(123, 92, 255, .7)); }
+.growth-path .gp-track { fill: none; stroke: rgba(154, 168, 199, .12); stroke-width: 3; stroke-dasharray: 2 10; stroke-linecap: round; }
+.growth-path .gp-line { fill: none; stroke: url(#gpGrad); stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 0 6px rgba(123, 92, 255, .7)); }
 .growth-path .gp-node { fill: var(--bg); stroke: rgba(154, 168, 199, .35); stroke-width: 2; transition: fill .4s, stroke .4s, r .4s; }
-.growth-path .gp-node.lit { fill: #fff; stroke: var(--orange); r: 7; filter: drop-shadow(0 0 8px rgba(255, 106, 69, .9)); }
+.growth-path .gp-node.lit { fill: #fff; stroke: var(--orange); r: 8; filter: drop-shadow(0 0 8px rgba(255, 106, 69, .9)); }
 .growth-path .gp-spark { fill: #fff; filter: drop-shadow(0 0 10px #fff) drop-shadow(0 0 18px var(--orange)); }
 main > section { position: relative; z-index: 1; }
 
@@ -552,7 +552,7 @@ main > section { position: relative; z-index: 1; }
 .reveal.in { transform: none; }
 
 @media (max-width: 760px) {
-  .growth-path .gp-line { stroke-width: 2.5; }
+  .growth-path .gp-line { stroke-width: 4.5; }
   .floater.orb { opacity: .4; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -634,3 +634,26 @@ main { overflow-x: clip; }
 [data-theme="light"] .hero-shade { background:
     linear-gradient(90deg, rgba(5, 11, 26, .85) 0%, rgba(5, 11, 26, .5) 45%, rgba(5, 11, 26, .15) 100%),
     linear-gradient(180deg, rgba(5, 11, 26, 0) 70%, #050b1a 100%); }
+
+/* --- journey finish line: a down-arrow that brightens as you approach, then pulses --- */
+.gp-arrow { --near: 0; position: absolute; z-index: 3; width: 48px; height: 48px; margin: 0; padding: 0; border: 0; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; color: #fff; text-decoration: none;
+  transform: translate(-50%, 0) scale(calc(.7 + .3 * var(--near)));
+  opacity: calc(.18 + .82 * var(--near));
+  background: radial-gradient(circle at 50% 35%, #ff9a5c, var(--orange) 60%, #e0482a);
+  box-shadow: 0 0 calc(40px * var(--near)) calc(6px * var(--near)) rgba(255, 106, 69, calc(.65 * var(--near)));
+  transition: transform .25s ease, opacity .25s ease; }
+.gp-arrow svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.gp-arrow::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid rgba(255, 140, 90, .9); opacity: 0; }
+.gp-arrow.show { opacity: 1; animation: arrowBob 1.4s ease-in-out infinite; }
+.gp-arrow.show::before { animation: arrowRing 1.4s ease-out infinite; }
+.gp-arrow.show svg { animation: arrowChevron 1.4s ease-in-out infinite; }
+@keyframes arrowBob { 0%, 100% { transform: translate(-50%, 0) scale(1); } 50% { transform: translate(-50%, 8px) scale(1.06); } }
+@keyframes arrowRing { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(1.9); opacity: 0; } }
+@keyframes arrowChevron { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(2px); } }
+@media (prefers-reduced-motion: reduce) { .gp-arrow.show, .gp-arrow.show::before, .gp-arrow.show svg { animation: none; } }
+/* room above the form on smaller screens for the journey's "You made it!" bubble */
+@media (max-width: 980px) { .cta-grid { row-gap: 110px; } }
+
+/* room above the "Get my free growth plan" button for the journey arrow */
+.cta-band { padding-top: clamp(96px, 10vw, 128px); }

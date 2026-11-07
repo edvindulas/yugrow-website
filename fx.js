@@ -37,47 +37,103 @@
   svg.innerHTML = '<defs><linearGradient id="gpGrad" x1="0" y1="0" x2="0" y2="1">' +
     '<stop offset="0" stop-color="#1a6dff"/><stop offset=".45" stop-color="#7b5cff"/>' +
     '<stop offset=".7" stop-color="#e04fb4"/><stop offset="1" stop-color="#ff6a45"/></linearGradient></defs>' +
-    '<path class="gp-track"/><path class="gp-line"/><g class="gp-nodes"></g><circle class="gp-spark" r="4"/>';
+    '<path class="gp-track"/><path class="gp-line"/><g class="gp-nodes"></g><circle class="gp-spark" r="6"/>';
   main.prepend(svg);
   const track = svg.querySelector('.gp-track');
   const line = svg.querySelector('.gp-line');
   const nodesG = svg.querySelector('.gp-nodes');
   const spark = svg.querySelector('.gp-spark');
-  let total = 0, samples = [], nodes = [];
+  let total = 0, samples = [], nodes = [], reachedEnd = false;
+
+  // The journey ends at the interest form (or the "get my plan" button on pages without one)
+  const formEl = document.getElementById('leadForm');
+  const goalEl = formEl || document.querySelector('.cta-band .btn');
+  let goal = null;
+  const bubble = document.createElement(formEl ? 'button' : 'a');
+  bubble.className = 'gp-arrow';
+  if (formEl) bubble.type = 'button'; else bubble.href = '/contact/';
+  const label = window.t ? t(formEl ? 'gp.d' : 'gp.d2') : '';
+  bubble.setAttribute('aria-label', label); bubble.title = label;
+  bubble.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l6 6 6-6M6 12l6 6 6-6"/></svg>';
+  if (goalEl) main.appendChild(bubble);
+  if (formEl) bubble.addEventListener('click', () => {
+    formEl.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    const first = formEl.querySelector('input:not([type=hidden]):not([hidden])');
+    setTimeout(() => first && first.focus({ preventScroll: true }), reduce ? 0 : 500);
+    if (window.track) window.track('journey_arrow_click');
+  });
 
   function buildPath() {
     const sections = [...main.children].filter(el => el.tagName === 'SECTION');
-    if (sections.length < 2) { svg.style.display = 'none'; return; }
+    if (sections.length < 2) { svg.style.display = 'none'; bubble.style.display = 'none'; return; }
     const W = main.clientWidth, H = main.scrollHeight;
     const container = Math.min(1180, W - 32);
     const gutter = (W - container) / 2;
-    const inset = gutter > 90 ? gutter * 0.45 : Math.max(8, gutter * 0.5);
+    const inset = gutter > 90 ? gutter * 0.45 : Math.max(9, gutter * 0.5);
     const X = [inset, W - inset];
     svg.setAttribute('width', W); svg.setAttribute('height', H);
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.style.height = H + 'px';
+    const mainTop = main.getBoundingClientRect().top + scrollY;
+
+    // where the journey ends: just above the middle of the form / button
+    goal = null;
+    let goalSection = null, goalSide = null;
+    if (goalEl && goalEl.offsetParent !== null) {
+      const r = goalEl.getBoundingClientRect();
+      const gx = r.left + r.width / 2 - main.getBoundingClientRect().left;
+      const gy = r.top + scrollY - mainTop - 64;   // line stops here; the arrow fills the gap down to the form
+      goal = { x: gx, y: gy };
+      goalSection = sections.find(sec => sec.contains(goalEl));
+      goalSide = Math.abs(gx - X[0]) < Math.abs(gx - X[1]) ? 0 : 1;
+    }
 
     const first = sections[0];
-    let side = 0;
-    let y0 = first.offsetTop + Math.min(first.offsetHeight * 0.6, 420);
+    // The Contact page is the destination itself (form at the very top): no journey needed there
+    if (goalSection === first) { svg.style.display = 'none'; bubble.style.display = 'none'; total = 0; return; }
+    svg.style.display = '';
+    const goalFirst = false;
+    let side = goalFirst ? goalSide : 0;
+    let y0 = goalFirst ? Math.max(first.offsetTop + 20, goal.y - 220) : first.offsetTop + Math.min(first.offsetHeight * 0.6, 420);
     let d = `M ${X[side]} ${y0}`;
     nodes = [{ x: X[side], y: y0 }];
-    sections.slice(1).forEach(sec => {
+    for (const sec of goalFirst ? [] : sections.slice(1)) {
       const b = sec.offsetTop;
-      const next = 1 - side;
-      d += ` L ${X[side]} ${b - 60} C ${X[side]} ${b + 10}, ${X[next]} ${b + 10}, ${X[next]} ${b + 80}`;
-      nodes.push({ x: X[next], y: b + 80 });
+      // arrive at the goal's section on the side nearest the goal, so the line never cuts through text
+      const next = sec === goalSection ? goalSide : 1 - side;
+      // in the goal's section, arrive a little above the form so there is room to turn in
+      const ny = sec === goalSection ? Math.max(b - 40, Math.min(b + 80, goal.y - 40)) : b + 80;
+      if (next !== side) d += ` L ${X[side]} ${b - 60} C ${X[side]} ${b + 10}, ${X[next]} ${b + 10}, ${X[next]} ${ny}`;
+      else d += ` L ${X[side]} ${ny}`;
+      nodes.push({ x: X[next], y: ny });
       side = next;
-    });
-    const last = sections[sections.length - 1];
-    const yEnd = last.offsetTop + last.offsetHeight - 60;
-    d += ` L ${X[side]} ${yEnd}`;
+      if (sec === goalSection) break;
+    }
+    const lastY = nodes[nodes.length - 1].y;
+    if (goal && goal.y > lastY + 10) {
+      if (goal.y - lastY > 160) {
+        // long way down (e.g. phones, where the form sits below the text): follow the edge, then turn in
+        const turn = goal.y - 120;
+        d += ` L ${X[side]} ${turn} C ${X[side]} ${goal.y - 30}, ${goal.x} ${turn}, ${goal.x} ${goal.y}`;
+      } else {
+        d += ` C ${X[side]} ${(lastY + goal.y) / 2 + 20}, ${goal.x} ${lastY}, ${goal.x} ${goal.y}`;
+      }
+      // the pulsing arrow sits at the end of the line, pointing down into the form
+      bubble.style.display = '';
+      bubble.style.left = goal.x + 'px';
+      bubble.style.top = goal.y + 'px';
+    } else {
+      const last = sections[sections.length - 1];
+      d += ` L ${X[side]} ${last.offsetTop + last.offsetHeight - 60}`;
+      goal = null;
+      bubble.style.display = 'none';
+    }
     track.setAttribute('d', d); line.setAttribute('d', d);
     total = line.getTotalLength();
     line.style.strokeDasharray = total;
     samples = [];
     for (let l = 0; l <= total; l += 12) samples.push([l, line.getPointAtLength(l).y]);
-    samples.push([total, yEnd]);
-    nodesG.innerHTML = nodes.map(n => `<circle class="gp-node" cx="${n.x}" cy="${n.y}" r="5"/>`).join('');
+    samples.push([total, line.getPointAtLength(total).y]);
+    nodesG.innerHTML = nodes.map(n => `<circle class="gp-node" cx="${n.x}" cy="${n.y}" r="6"/>`).join('');
   }
 
   function lengthAtY(y) {
@@ -106,6 +162,12 @@
       spark.setAttribute('cx', pt.x); spark.setAttribute('cy', pt.y);
       spark.style.opacity = len > 0 && len < total ? 1 : 0;
       nodesG.querySelectorAll('.gp-node').forEach((c, i) => c.classList.toggle('lit', nodes[i].y <= target));
+      const done = goal && len >= total - 2;
+      // the arrow brightens as the line approaches the form, then pulses when it arrives
+      const near = goal ? Math.min(1, Math.max(0, 1 - (total - len) / 700)) : 0;
+      bubble.style.setProperty('--near', near.toFixed(3));
+      bubble.classList.toggle('show', !!done);
+      if (done && !reachedEnd) { reachedEnd = true; if (window.track) window.track('journey_complete', { page: document.body.dataset.page }); }
     }
     if (!reduce) floaterEls.forEach(el => { el.style.transform = `translate3d(0, ${(scrollY * el.dataset.speed).toFixed(1)}px, 0)`; });
   }
