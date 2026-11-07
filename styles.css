@@ -657,3 +657,80 @@ main { overflow-x: clip; }
 
 /* room above the "Get my free growth plan" button for the journey arrow */
 .cta-band { padding-top: clamp(96px, 10vw, 128px); }
+
+/* =====================================================================
+   MORE MOTION (all switched off for visitors who prefer reduced motion)
+   ===================================================================== */
+@media (prefers-reduced-motion: no-preference) {
+  /* hero: text rises in on load, dashboard slides in then floats */
+  .hero-copy > * { animation: riseIn .9s cubic-bezier(.2, .8, .2, 1) both; }
+  .hero-copy > *:nth-child(1) { animation-delay: .05s; }
+  .hero-copy > *:nth-child(2) { animation-delay: .15s; }
+  .hero-copy > *:nth-child(3) { animation-delay: .28s; }
+  .hero-copy > *:nth-child(4) { animation-delay: .4s; }
+  .hero-copy > *:nth-child(5) { animation-delay: .52s; }
+  .hero-card { animation: cardIn 1s .35s cubic-bezier(.2, .8, .2, 1) both, floatY 7s 1.4s ease-in-out infinite; }
+  .dash-pipeline b { animation: barGrow 1.3s cubic-bezier(.2, .8, .2, 1) both; transform-origin: left; }
+  .dash-pipeline div:nth-child(1) b { animation-delay: .9s; } .dash-pipeline div:nth-child(2) b { animation-delay: 1.05s; }
+  .dash-pipeline div:nth-child(3) b { animation-delay: 1.2s; } .dash-pipeline div:nth-child(4) b { animation-delay: 1.35s; }
+  .live .dot { animation: pulse 1.8s infinite; }
+
+  /* platforms ticker */
+  .platforms.ticker { flex-wrap: nowrap; justify-content: flex-start; width: max-content; gap: 0; animation: ticker 32s linear infinite; }
+  .platforms.ticker li { padding: 0 28px; }
+  .trust .container { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .trust:hover .platforms.ticker { animation-play-state: paused; }
+
+  /* orange buttons: a light shimmer sweeps across every few seconds */
+  .btn-orange { position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s, translate .2s; }
+  .btn-orange::after { content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .45), transparent); transform: skewX(-20deg); animation: shimmer 4.5s ease-in-out infinite; }
+
+  /* service icons pop in as their card appears */
+  .card.in .icon { animation: iconPop .7s .2s cubic-bezier(.3, 1.6, .5, 1) both; }
+
+  /* lead journey: the connector fills and each step lights up in turn */
+  .journey-steps::before { transform: scaleX(0); transform-origin: left; transition: transform 1.6s cubic-bezier(.4, 0, .2, 1); }
+  .journey.play .journey-steps::before { transform: scaleX(1); }
+  .journey-steps li { opacity: .35; transition: opacity .5s; }
+  .journey.play .journey-steps li { opacity: 1; }
+  .journey.play .journey-steps li:nth-child(1) { transition-delay: .1s; } .journey.play .journey-steps li:nth-child(2) { transition-delay: .5s; }
+  .journey.play .journey-steps li:nth-child(3) { transition-delay: .9s; } .journey.play .journey-steps li:nth-child(4) { transition-delay: 1.3s; }
+  .journey.play .j-icon { animation: iconPop .6s cubic-bezier(.3, 1.6, .5, 1) both; }
+  .journey.play li:nth-child(2) .j-icon { animation-delay: .4s; } .journey.play li:nth-child(3) .j-icon { animation-delay: .8s; }
+  .journey.play li:nth-child(4) .j-icon { animation-delay: 1.2s; }
+
+  /* testimonial stars pop in one by one */
+  .stars i { display: inline-block; font-style: normal; opacity: 0; transform: scale(.3) rotate(-30deg); }
+  .stars.play i { animation: starPop .5s calc(var(--i) * .12s) cubic-bezier(.3, 1.6, .5, 1) forwards; }
+
+  /* background glows drift slowly */
+  .floater.orb { animation: drift 16s ease-in-out infinite alternate; }
+  .floater.orb:nth-child(2n) { animation-duration: 21s; animation-direction: alternate-reverse; }
+  .floater.slash { animation: wobble 9s ease-in-out infinite alternate; }
+
+  /* headings drift with scroll (set in fx.js) */
+  .section-head h2, .page-title, .problem h2, .ai-band h2, .about-story h2, .cta h2, .mission-statement { transition: translate .15s linear; }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 760px) {
+  .journey-steps::before { transform: scaleY(0); transform-origin: top; }
+  .journey.play .journey-steps::before { transform: scaleY(1); }
+}
+@keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes cardIn { from { opacity: 0; transform: translateX(50px) rotate(2deg); } to { opacity: 1; transform: none; } }
+@keyframes floatY { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+@keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes ticker { to { transform: translateX(-50%); } }
+@keyframes shimmer { 0%, 70% { left: -60%; } 100% { left: 130%; } }
+@keyframes iconPop { 0% { transform: scale(.4) rotate(-20deg); opacity: 0; } 100% { transform: none; opacity: 1; } }
+@keyframes starPop { to { opacity: 1; transform: none; } }
+@keyframes drift { 0% { translate: 0 0; scale: 1; } 100% { translate: 60px -40px; scale: 1.15; } }
+@keyframes wobble { 0% { rotate: -8deg; translate: 0 0; } 100% { rotate: 10deg; translate: -14px 18px; } }
+@media (prefers-reduced-motion: reduce) {
+  .reveal.from-left, .reveal.from-right, .reveal.zoom { transform: none; }
+}
+
+/* bottom banner on phones/tablets: stack the button below the headline with room for the journey arrow */
+@media (max-width: 1000px) {
+  .cta-band-inner { flex-direction: column; align-items: flex-start; row-gap: 104px; }
+}

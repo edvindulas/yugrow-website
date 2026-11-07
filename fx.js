@@ -43,7 +43,7 @@
   const line = svg.querySelector('.gp-line');
   const nodesG = svg.querySelector('.gp-nodes');
   const spark = svg.querySelector('.gp-spark');
-  let total = 0, samples = [], nodes = [], reachedEnd = false;
+  let total = 0, samples = [], nodes = [], reachedEnd = false, curLen = 0, targetLen = 0, lineRAF = 0;
 
   // The journey ends at the interest form (or the "get my plan" button on pages without one)
   const formEl = document.getElementById('leadForm');
@@ -100,19 +100,32 @@
       const b = sec.offsetTop;
       // arrive at the goal's section on the side nearest the goal, so the line never cuts through text
       const next = sec === goalSection ? goalSide : 1 - side;
-      // in the goal's section, arrive a little above the form so there is room to turn in
-      const ny = sec === goalSection ? Math.max(b - 40, Math.min(b + 80, goal.y - 40)) : b + 80;
-      if (next !== side) d += ` L ${X[side]} ${b - 60} C ${X[side]} ${b + 10}, ${X[next]} ${b + 10}, ${X[next]} ${ny}`;
-      else d += ` L ${X[side]} ${ny}`;
-      nodes.push({ x: X[next], y: ny });
+      // cross only inside the empty padding between two sections, so the line never runs through text
+      const prevSec = sections[sections.indexOf(sec) - 1];
+      const padAbove = parseFloat(getComputedStyle(prevSec).paddingBottom) || 40;
+      const padBelow = parseFloat(getComputedStyle(sec).paddingTop) || 40;
+      const y1 = b - Math.max(12, padAbove * 0.8);
+      let y2 = b + Math.max(12, padBelow * 0.7);
+      if (sec === goalSection) y2 = Math.max(y1 + 24, Math.min(y2, goal.y - 40));
+      const ym = (y1 + y2) / 2;
+      if (next !== side) d += ` L ${X[side]} ${y1} C ${X[side]} ${ym}, ${X[next]} ${ym}, ${X[next]} ${y2}`;
+      else d += ` L ${X[side]} ${y2}`;
+      nodes.push({ x: X[next], y: y2 });
       side = next;
       if (sec === goalSection) break;
     }
     const lastY = nodes[nodes.length - 1].y;
+    // when the form/button sits *below* other content (phones), only turn in once we're past that content
+    let clearY = -Infinity;
+    const above = goal && goalEl.previousElementSibling;
+    if (above) {
+      const ar = above.getBoundingClientRect(), gr = goalEl.getBoundingClientRect();
+      if (ar.bottom <= gr.top + 1) clearY = ar.bottom + scrollY - mainTop + 12;
+    }
     if (goal && goal.y > lastY + 10) {
-      if (goal.y - lastY > 160) {
-        // long way down (e.g. phones, where the form sits below the text): follow the edge, then turn in
-        const turn = goal.y - 120;
+      if (goal.y - lastY > 160 || clearY > lastY) {
+        // follow the edge down, then turn in toward the arrow
+        const turn = Math.min(Math.max(goal.y - 120, clearY), goal.y - 24);
         d += ` L ${X[side]} ${turn} C ${X[side]} ${goal.y - 30}, ${goal.x} ${turn}, ${goal.x} ${goal.y}`;
       } else {
         d += ` C ${X[side]} ${(lastY + goal.y) / 2 + 20}, ${goal.x} ${lastY}, ${goal.x} ${goal.y}`;
@@ -134,6 +147,7 @@
     for (let l = 0; l <= total; l += 12) samples.push([l, line.getPointAtLength(l).y]);
     samples.push([total, line.getPointAtLength(total).y]);
     nodesG.innerHTML = nodes.map(n => `<circle class="gp-node" cx="${n.x}" cy="${n.y}" r="6"/>`).join('');
+    curLen = Math.min(curLen, total); drawLine(curLen);
   }
 
   function lengthAtY(y) {
@@ -156,21 +170,47 @@
     if (total) {
       const mainTop = main.getBoundingClientRect().top + scrollY;
       const target = reduce ? Infinity : scrollY + innerHeight * 0.62 - mainTop;
-      const len = p > 0.995 ? total : lengthAtY(target);
-      line.style.strokeDashoffset = total - len;
-      const pt = line.getPointAtLength(len);
-      spark.setAttribute('cx', pt.x); spark.setAttribute('cy', pt.y);
-      spark.style.opacity = len > 0 && len < total ? 1 : 0;
-      nodesG.querySelectorAll('.gp-node').forEach((c, i) => c.classList.toggle('lit', nodes[i].y <= target));
-      const done = goal && len >= total - 2;
-      // the arrow brightens as the line approaches the form, then pulses when it arrives
-      const near = goal ? Math.min(1, Math.max(0, 1 - (total - len) / 700)) : 0;
-      bubble.style.setProperty('--near', near.toFixed(3));
-      bubble.classList.toggle('show', !!done);
-      if (done && !reachedEnd) { reachedEnd = true; if (window.track) window.track('journey_complete', { page: document.body.dataset.page }); }
+      targetLen = p > 0.995 ? total : lengthAtY(target);
+      if (reduce) { curLen = targetLen; drawLine(curLen); }
+      else if (!lineRAF) lineRAF = requestAnimationFrame(stepLine);
     }
-    if (!reduce) floaterEls.forEach(el => { el.style.transform = `translate3d(0, ${(scrollY * el.dataset.speed).toFixed(1)}px, 0)`; });
+    parallax();
   }
+  function drawLine(len) {
+    line.style.strokeDashoffset = total - len;
+    const pt = line.getPointAtLength(len);
+    spark.setAttribute('cx', pt.x); spark.setAttribute('cy', pt.y);
+    spark.style.opacity = len > 1 && len < total - 1 ? 1 : 0;
+    nodesG.querySelectorAll('.gp-node').forEach((c, i) => c.classList.toggle('lit', nodes[i].y <= pt.y + 1));
+    const done = goal && len >= total - 2;
+    // the arrow brightens as the line approaches the form, then pulses when it arrives
+    const near = goal ? Math.min(1, Math.max(0, 1 - (total - len) / 700)) : 0;
+    bubble.style.setProperty('--near', near.toFixed(3));
+    bubble.classList.toggle('show', !!done);
+    if (done && !reachedEnd) { reachedEnd = true; if (window.track) window.track('journey_complete', { page: document.body.dataset.page }); }
+  }
+  function stepLine() {
+    lineRAF = 0;
+    const diff = targetLen - curLen;
+    curLen = Math.abs(diff) < 0.6 ? targetLen : curLen + diff * 0.12;
+    drawLine(curLen);
+    if (curLen !== targetLen) lineRAF = requestAnimationFrame(stepLine);
+  }
+
+  /* ---------- gentle parallax on headings + floating shapes ---------- */
+  const driftEls = [...document.querySelectorAll('.section-head h2, .page-title, .problem h2, .ai-band h2, .about-story h2, .cta h2, .mission-statement')];
+  function parallax() {
+    if (reduce) return;
+    floaterEls.forEach(el => { el.style.transform = `translate3d(0, ${(scrollY * el.dataset.speed).toFixed(1)}px, 0)`; });
+    const vh = innerHeight;
+    driftEls.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      const off = (r.top + r.height / 2 - vh / 2) / vh;      // -0.5 … 0.5 across the screen
+      el.style.translate = `0 ${(off * 28).toFixed(1)}px`;
+    });
+  }
+
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
   addEventListener('scroll', onScroll, { passive: true });
   let rt;
@@ -179,6 +219,46 @@
   // rebuild once fonts/images settle and whenever the layout height changes (e.g. FAQ opened, language switched)
   if ('ResizeObserver' in window) new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { buildPath(); update(); }, 100); }).observe(main);
   buildPath(); update();
+
+  /* ---------- more motion ---------- */
+  // platforms ticker: duplicate the list so it can scroll seamlessly
+  const plat = document.querySelector('.platforms');
+  if (plat && !reduce) {
+    plat.innerHTML += plat.innerHTML.replace(/<li>/g, '<li aria-hidden="true">');
+    plat.classList.add('ticker');
+  }
+  // testimonial stars pop in one by one
+  document.querySelectorAll('.stars').forEach(st => {
+    st.innerHTML = [...st.textContent.trim()].map((c, i) => `<i style="--i:${i}">${c}</i>`).join('');
+  });
+  // results numbers count up when they come into view (e.g. +186%, −52%, 4.6x)
+  const counters = [...document.querySelectorAll('.case-num')].map(el => {
+    const m = el.textContent.trim().match(/^([^\d]*)([\d.]+)(.*)$/);
+    return m ? { el, pre: m[1], num: parseFloat(m[2]), dec: (m[2].split('.')[1] || '').length, post: m[3] } : null;
+  }).filter(Boolean);
+  const playIO = 'IntersectionObserver' in window ? new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    en.target.classList.add('play');
+    const c = counters.find(c => c.el === en.target);
+    if (c && !reduce) {
+      const t0 = performance.now();
+      const tick = now => { const k = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - k, 3);
+        c.el.textContent = c.pre + (c.num * e).toFixed(c.dec) + c.post; if (k < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    }
+    playIO.unobserve(en.target);
+  }), { threshold: 0.35 }) : null;
+  if (playIO) document.querySelectorAll('.case-num, .journey, .stars').forEach(el => playIO.observe(el));
+  else document.querySelectorAll('.journey, .stars').forEach(el => el.classList.add('play'));
+
+  // orange buttons lean gently toward the cursor (desktop)
+  if (finePointer && !reduce) document.querySelectorAll('.btn-orange').forEach(btn => {
+    btn.addEventListener('pointermove', e => {
+      const r = btn.getBoundingClientRect();
+      btn.style.translate = `${((e.clientX - r.left) / r.width - 0.5) * 10}px ${((e.clientY - r.top) / r.height - 0.5) * 8}px`;
+    });
+    btn.addEventListener('pointerleave', () => { btn.style.translate = ''; });
+  });
 
   /* ---------- directional, staggered reveals ---------- */
   document.querySelectorAll('.reveal').forEach(el => {
