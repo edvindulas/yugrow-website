@@ -86,7 +86,7 @@
       const gy = r.top + scrollY - mainTop - 64;   // line stops here; the arrow fills the gap down to the form
       goal = { x: gx, y: gy };
       goalSection = sections.find(sec => sec.contains(goalEl));
-      goalSide = Math.abs(gx - X[0]) < Math.abs(gx - X[1]) ? 0 : 1;
+      goalSide = 0;   // the line runs down the left side only
     }
 
     const first = sections[0];
@@ -101,7 +101,7 @@
     for (const sec of goalFirst ? [] : sections.slice(1)) {
       const b = sec.offsetTop;
       // arrive at the goal's section on the side nearest the goal, so the line never cuts through text
-      const next = sec === goalSection ? goalSide : 1 - side;
+      const next = 0;   // stay on the left side (no zig-zag)
       // cross only inside the empty padding between two sections, so the line never runs through text
       const prevSec = sections[sections.indexOf(sec) - 1];
       const padAbove = parseFloat(getComputedStyle(prevSec).paddingBottom) || 40;
