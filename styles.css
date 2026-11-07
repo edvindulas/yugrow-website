@@ -1,3 +1,17 @@
+/* Self-hosted Google Fonts (Montserrat, Inter), latin + latin-ext */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url(/assets/fonts/inter-latin-ext-UcC73FwrK3.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url(/assets/fonts/inter-latin-UcC73FwrK3.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url(/assets/fonts/inter-latin-ext-UcC73FwrK3.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url(/assets/fonts/inter-latin-UcC73FwrK3.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url(/assets/fonts/inter-latin-ext-UcC73FwrK3.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url(/assets/fonts/inter-latin-UcC73FwrK3.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-display: swap; src: url(/assets/fonts/montserrat-latin-ext-JTUSjIg1_i.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-display: swap; src: url(/assets/fonts/montserrat-latin-JTUSjIg1_i.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 800; font-display: swap; src: url(/assets/fonts/montserrat-latin-ext-JTUSjIg1_i.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 800; font-display: swap; src: url(/assets/fonts/montserrat-latin-JTUSjIg1_i.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 900; font-display: swap; src: url(/assets/fonts/montserrat-latin-ext-JTUSjIg1_i.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 900; font-display: swap; src: url(/assets/fonts/montserrat-latin-JTUSjIg1_i.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
 /* ===== YU/GROW palette (from logo) ===== */
 :root {
   --bg: #050b1a;          /* near-black, like the logo background */
@@ -660,13 +674,7 @@ main { overflow-x: clip; }
    ===================================================================== */
 @media (prefers-reduced-motion: no-preference) {
   /* hero: text rises in on load, dashboard slides in then floats */
-  .hero-copy > * { animation: riseIn .9s cubic-bezier(.2, .8, .2, 1) both; }
-  .hero-copy > *:nth-child(1) { animation-delay: .05s; }
-  .hero-copy > *:nth-child(2) { animation-delay: .15s; }
-  .hero-copy > *:nth-child(3) { animation-delay: .28s; }
-  .hero-copy > *:nth-child(4) { animation-delay: .4s; }
-  .hero-copy > *:nth-child(5) { animation-delay: .52s; }
-  .hero-card { animation: cardIn 1s .35s cubic-bezier(.2, .8, .2, 1) both, floatY 7s 1.4s ease-in-out infinite; }
+  .hero-card { animation: cardIn 1s cubic-bezier(.2, .8, .2, 1) both, floatY 7s 1.4s ease-in-out infinite; }
   .dash-pipeline b { animation: barGrow 2.2s cubic-bezier(.2, .8, .2, 1) both; transform-origin: left; }
   .dash-pipeline div:nth-child(1) b { animation-delay: 1.2s; } .dash-pipeline div:nth-child(2) b { animation-delay: 1.6s; }
   .dash-pipeline div:nth-child(3) b { animation-delay: 2s; } .dash-pipeline div:nth-child(4) b { animation-delay: 2.4s; }
@@ -707,14 +715,13 @@ main { overflow-x: clip; }
   .floater.slash { animation: wobble 9s ease-in-out infinite alternate; }
 
   /* headings drift with scroll (set in fx.js) */
-  .section-head h2, .page-title, .problem h2, .ai-band h2, .about-story h2, .cta h2, .mission-statement { transition: translate .15s linear; }
 }
 @media (prefers-reduced-motion: no-preference) and (max-width: 760px) {
   .journey-steps::before { transform: scaleY(0); transform-origin: top; }
   .journey.play .journey-steps::before { transform: scaleY(1); }
 }
 @keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
-@keyframes cardIn { from { opacity: 0; transform: translateX(50px) rotate(2deg); } to { opacity: 1; transform: none; } }
+@keyframes cardIn { from { transform: translateX(40px) rotate(1.5deg); } to { transform: none; } }
 @keyframes floatY { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
 @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes ticker { to { transform: translateX(-50%); } }

@@ -179,17 +179,9 @@
   }
 
   /* ---------- gentle parallax on headings + floating shapes ---------- */
-  const driftEls = [...document.querySelectorAll('.section-head h2, .page-title, .problem h2, .ai-band h2, .about-story h2, .cta h2, .mission-statement')];
   function parallax() {
     if (reduce) return;
     floaterEls.forEach(el => { el.style.transform = `translate3d(0, ${(scrollY * el.dataset.speed).toFixed(1)}px, 0)`; });
-    const vh = innerHeight;
-    driftEls.forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.bottom < -100 || r.top > vh + 100) return;
-      const off = (r.top + r.height / 2 - vh / 2) / vh;      // -0.5 … 0.5 across the screen
-      el.style.translate = `0 ${(off * 28).toFixed(1)}px`;
-    });
   }
 
   const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };

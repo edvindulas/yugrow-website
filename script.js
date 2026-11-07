@@ -52,14 +52,21 @@ if (page === 'home') {
 
 // Background video: show the still image instead for visitors who prefer reduced motion
 const heroVideo = document.getElementById('heroVideo');
-if (heroVideo && reduce) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
-else if (heroVideo) {
-  // Some phones block autoplay (e.g. iPhone Low Power Mode). Try to start it; if blocked, the still image stays.
-  heroVideo.muted = true;
-  const tryPlay = () => { const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); };
-  tryPlay();
-  document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
-  document.addEventListener('visibilitychange', () => { if (!document.hidden && heroVideo.paused) tryPlay(); });
+// The poster image shows instantly; the video itself loads only after the page has finished loading,
+// so it never competes with the important first content.
+if (heroVideo && !reduce) {
+  const startVideo = () => {
+    heroVideo.querySelectorAll('source[data-src]').forEach(s => { s.src = s.dataset.src; s.removeAttribute('data-src'); });
+    heroVideo.muted = true;
+    heroVideo.load();
+    // Some phones block autoplay (e.g. iPhone Low Power Mode). Try to start it; if blocked, the still image stays.
+    const tryPlay = () => { const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); };
+    tryPlay();
+    document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && heroVideo.paused) tryPlay(); });
+  };
+  const later = () => ('requestIdleCallback' in window ? requestIdleCallback(startVideo, { timeout: 2500 }) : setTimeout(startVideo, 300));
+  if (document.readyState === 'complete') later(); else addEventListener('load', later, { once: true });
 }
 
 // Animated number counters

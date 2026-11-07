@@ -32,9 +32,17 @@ def include(text):
 
 # Version tag = hash of the CSS/JS files, so it changes only when they change
 h = hashlib.sha1()
-for f in ['styles.css', 'script.js', 'i18n.js', 'analytics.js', 'fx.js']:
+for f in ['styles.css', 'script.js', 'i18n.js', 'analytics.js', 'fx.js', 'i18n/bs.json', 'i18n/de.json', 'i18n/es.json']:
     h.update((ROOT / f).read_bytes())
 version = h.hexdigest()[:10]
+
+# Minified stylesheet for the live pages (edit styles.css; styles.min.css is generated)
+css = read(ROOT / 'styles.css')
+css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+css = re.sub(r'\s+', ' ', css)
+css = re.sub(r'\s*([{};,>])\s*', r'\1', css)
+css = re.sub(r':\s+', ':', css).replace(';}', '}')
+(ROOT / 'styles.min.css').write_text(css.strip() + '\n', encoding='utf-8')
 
 layout = read(SRC / 'layout.html')
 sitemap = []
@@ -59,6 +67,7 @@ for page_file in sorted((SRC / 'pages').glob('*.html')):
         'page': meta['page'],
         'body_class': f' class="{meta["body_class"]}"' if meta.get('body_class') else '',
         'head_extra': partials['jsonld'] + '\n' if meta.get('jsonld') else '',
+        'preload': ''.join(f'  <link rel="preload" href="{u}" as="image" fetchpriority="high">\n' for u in meta.get('preload_images', [])),
         'v': version,
         'content': content,
     }
