@@ -53,6 +53,14 @@ if (page === 'home') {
 // Background video: show the still image instead for visitors who prefer reduced motion
 const heroVideo = document.getElementById('heroVideo');
 if (heroVideo && reduce) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
+else if (heroVideo) {
+  // Some phones block autoplay (e.g. iPhone Low Power Mode). Try to start it; if blocked, the still image stays.
+  heroVideo.muted = true;
+  const tryPlay = () => { const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); };
+  tryPlay();
+  document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && heroVideo.paused) tryPlay(); });
+}
 
 // Animated number counters
 function runCounter(el) {

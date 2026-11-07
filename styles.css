@@ -726,3 +726,10 @@ main { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) {
   .reveal.from-left, .reveal.from-right, .reveal.zoom { transform: none; }
 }
+
+/* background video: never show the iPhone's native play button / controls (e.g. in Low Power Mode) */
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-panel,
+.hero-video::-webkit-media-controls-overlay-play-button,
+.hero-video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; opacity: 0; }
+.hero-video { pointer-events: none; }
