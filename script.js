@@ -19,6 +19,22 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   toggle.setAttribute('aria-expanded', 'false');
 }));
 
+// Light / dark mode (choice remembered; dark is the default)
+const themeBtn = document.getElementById('themeBtn');
+function setTheme(theme, save) {
+  document.documentElement.dataset.theme = theme;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', theme === 'light' ? '#f4f6fc' : '#050b1a');
+  if (themeBtn) themeBtn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+  if (save) { try { localStorage.setItem('yugrow-theme', theme); } catch (e) {} }
+}
+setTheme(document.documentElement.dataset.theme === 'light' ? 'light' : 'dark', false);
+if (themeBtn) themeBtn.addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  setTheme(next, true);
+  if (window.track) window.track('theme_change', { theme: next });
+});
+
 // Footer year
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();

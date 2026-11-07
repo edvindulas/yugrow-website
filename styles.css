@@ -559,3 +559,78 @@ main > section { position: relative; z-index: 1; }
   .grad { animation: none; }
   .tilt { transition: none; }
 }
+
+/* keep slide-in animations from widening the page on phones */
+html, body { overflow-x: clip; }
+main { overflow-x: clip; }
+
+/* =====================================================================
+   THEME TOGGLE + LIGHT MODE
+   Dark is the default; visitors switch with the sun/moon button.
+   In light mode the sky travels from morning blue → lavender → peach,
+   and the hero stays a dark "island" because the video is dark.
+   ===================================================================== */
+.theme-btn { flex: none; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  background: transparent; color: var(--text); border: 1px solid var(--line); transition: border-color .2s, transform .3s; }
+.theme-btn:hover { border-color: var(--blue); transform: rotate(-15deg); }
+.theme-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.theme-btn .i-moon { display: none; }
+[data-theme="light"] .theme-btn .i-sun { display: none; }
+[data-theme="light"] .theme-btn .i-moon { display: block; }
+@media (max-width: 1100px) { .header-inner { gap: 10px; } }
+@media (max-width: 420px) { .lang-btn { padding: .45em .6em; } .lang-btn .chev { display: none; } .logo { font-size: 1.35rem; } }
+
+[data-theme="light"] {
+  --bg: #f4f6fc; --bg-2: #ffffff; --navy: #e9eefb;
+  --text: #0b1a3a; --muted: #4b5a7c; --line: rgba(11, 33, 83, .12);
+  --glass: rgba(255, 255, 255, .62); --glass-strong: rgba(255, 255, 255, .86);
+  color-scheme: light;
+}
+[data-theme="light"] .logo { color: #0b2153; }
+[data-theme="light"] .site-header { background: rgba(255, 255, 255, .78); }
+[data-theme="light"] .nav a:not(.btn):hover, [data-theme="light"] .nav a.active:not(.btn) { color: var(--text); }
+[data-theme="light"] .nav-toggle span { background: var(--text); }
+[data-theme="light"] .platforms li { color: #3b4a6b; }
+[data-theme="light"] .trust { background: rgba(255, 255, 255, .45); }
+[data-theme="light"] .footer .footer-tagline, [data-theme="light"] .cookie-link:hover { color: var(--text); }
+[data-theme="light"] .founder-companies li { background: rgba(11, 33, 83, .05); }
+[data-theme="light"] .j-icon svg { stroke: var(--text); }
+[data-theme="light"] .j-won .j-icon svg { stroke: #fff; }
+[data-theme="light"] .card, [data-theme="light"] .case, [data-theme="light"] .quote, [data-theme="light"] .steps li,
+[data-theme="light"] .faq details, [data-theme="light"] .founder, [data-theme="light"] .form, [data-theme="light"] .journey,
+[data-theme="light"] .mission, [data-theme="light"] .panel { box-shadow: 0 18px 40px -24px rgba(11, 33, 83, .35); }
+[data-theme="light"] .form input, [data-theme="light"] .form select { background: #fff; }
+[data-theme="light"] .card:nth-child(6n+2) .icon svg { stroke: #6a4cf0; }
+[data-theme="light"] .card:nth-child(6n+3) .icon svg { stroke: #c93a97; }
+[data-theme="light"] .card:nth-child(6n+4) .icon svg { stroke: #ec4f2a; }
+[data-theme="light"] .card:nth-child(6n+5) .icon svg { stroke: #149a72; }
+[data-theme="light"] .card:nth-child(6n+6) .icon svg { stroke: #c98a00; }
+[data-theme="light"] .stat:nth-child(2) strong { color: #6a4cf0; }
+[data-theme="light"] .stat:nth-child(3) strong { color: #c93a97; }
+[data-theme="light"] .growth-path .gp-track { stroke: rgba(11, 33, 83, .14); }
+[data-theme="light"] .growth-path .gp-line { filter: drop-shadow(0 0 4px rgba(123, 92, 255, .45)); }
+[data-theme="light"] .growth-path .gp-node { stroke: rgba(11, 33, 83, .3); }
+[data-theme="light"] .growth-path .gp-spark { fill: var(--orange); filter: drop-shadow(0 0 8px var(--orange)); }
+[data-theme="light"] .floater.orb { opacity: .28; }
+[data-theme="light"] .sky .sky-stars { display: none; }
+[data-theme="light"] .sky .sky-night { background:
+    radial-gradient(ellipse 60% 50% at 80% 10%, rgba(26, 109, 255, .20), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 60%, rgba(120, 170, 255, .22), transparent 70%); }
+[data-theme="light"] .sky .sky-dusk { background:
+    radial-gradient(ellipse 55% 45% at 15% 30%, rgba(123, 92, 255, .20), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 85% 70%, rgba(224, 79, 180, .16), transparent 70%); }
+[data-theme="light"] .sky .sky-dawn { background:
+    radial-gradient(ellipse 80% 60% at 50% 110%, rgba(255, 128, 80, .38), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 12% 70%, rgba(255, 186, 120, .30), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 88% 45%, rgba(224, 79, 180, .16), transparent 70%); }
+
+/* the hero (with its dark video) stays dark in light mode */
+[data-theme="light"] .hero {
+  --text: #eef2fb; --muted: #9aa8c7; --line: rgba(154, 168, 199, .16);
+  --bg: #050b1a; --bg-2: #081430; --navy: #0b2153; --glass-strong: rgba(7, 14, 36, .78);
+  color: var(--text); background: #050b1a;
+}
+[data-theme="light"] .hero-video { -webkit-mask-image: none; mask-image: none; }
+[data-theme="light"] .hero-shade { background:
+    linear-gradient(90deg, rgba(5, 11, 26, .85) 0%, rgba(5, 11, 26, .5) 45%, rgba(5, 11, 26, .15) 100%),
+    linear-gradient(180deg, rgba(5, 11, 26, 0) 70%, #050b1a 100%); }
