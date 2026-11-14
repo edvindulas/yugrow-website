@@ -86,19 +86,20 @@ function runCounter(el) {
 }
 
 // Reveal-on-scroll + counters
-const revealTargets = document.querySelectorAll('.section-head, .card, .case, .quote, .steps li, .panel, .ai-list li, .faq details, .form, .stat, .founder, .pillars li');
+const revealTargets = document.querySelectorAll('.section-head, .card, .case, .quote, .steps li, .panel, .ai-list li, .faq details, .form, .stat, .founder, .pillars li, .browser, .phone-mock, .founder-card, .variant');
 revealTargets.forEach(el => el.classList.add('reveal'));
 
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
+      // tall elements (taller than the screen on phones) count as visible once 140px shows
+      if (!entry.isIntersecting || (entry.intersectionRatio < 0.2 && entry.intersectionRect.height < 140)) return;
       entry.target.classList.add('in');
       entry.target.querySelectorAll?.('[data-count]').forEach(runCounter);
       if (entry.target.dataset.count) runCounter(entry.target);
       io.unobserve(entry.target);
     });
-  }, { threshold: 0.2, rootMargin: '0px 0px -18% 0px' });
+  }, { threshold: [0.02, 0.05, 0.1, 0.2], rootMargin: '0px 0px -18% 0px' });
   revealTargets.forEach(el => io.observe(el));
   document.querySelectorAll('.hero-card [data-count]').forEach(el => io.observe(el));
 } else {
