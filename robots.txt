@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /_src/
-Disallow: /preview/
 
 Sitemap: https://yugrowagency.com/sitemap.xml
