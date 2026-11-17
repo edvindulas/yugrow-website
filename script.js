@@ -86,7 +86,7 @@ function runCounter(el) {
 }
 
 // Reveal-on-scroll + counters
-const revealTargets = document.querySelectorAll('.section-head, .card, .case, .quote, .steps li, .panel, .ai-list li, .faq details, .form, .stat, .founder, .pillars li, .browser, .phone-mock, .founder-card, .variant');
+const revealTargets = document.querySelectorAll('.section-head, .card, .case, .quote, .steps li, .panel, .ai-list li, .faq details, .form, .stat, .pillars li, .browser, .variant, .about-facts li');
 revealTargets.forEach(el => el.classList.add('reveal'));
 
 if ('IntersectionObserver' in window) {

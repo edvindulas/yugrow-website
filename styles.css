@@ -865,3 +865,12 @@ main { overflow-x: clip; }
   .variants { grid-template-columns: 1fr; } .abtest { padding: 24px 18px; }
 }
 @media (max-width: 640px) { .founders-home { grid-template-columns: 1fr; } .portrait { width: 160px; height: 160px; } }
+
+/* About: generic "at a glance" facts in place of founder profiles */
+.about-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.about-facts li { padding: 22px 24px; border-radius: var(--radius); border: 1px solid rgba(170, 185, 230, .16); border-left: 3px solid var(--blue);
+  background: var(--glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.about-facts li:nth-child(2) { border-left-color: var(--violet); }
+.about-facts li:nth-child(3) { border-left-color: var(--orange); }
+.about-facts strong { display: block; font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 4px; }
+.about-facts span { color: var(--muted); font-size: .95rem; }
