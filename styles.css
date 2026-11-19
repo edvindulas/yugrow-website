@@ -874,3 +874,8 @@ main { overflow-x: clip; }
 .about-facts li:nth-child(3) { border-left-color: var(--orange); }
 .about-facts strong { display: block; font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 4px; }
 .about-facts span { color: var(--muted); font-size: .95rem; }
+
+/* About: leadership (single founder card) */
+.team { max-width: 760px; margin: 56px auto 0; }
+.team .kicker { display: block; width: max-content; margin: 0 auto 16px; }
+.team .founder-photo { width: 112px; height: 112px; }
